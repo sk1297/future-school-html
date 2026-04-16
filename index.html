@@ -1439,7 +1439,7 @@
   const formSuccess = document.getElementById('formSuccess');
   const formNotice = document.getElementById('formNotice');
   const dobInput = document.getElementById('dob');
-  const FORM_WEBHOOK_URL = '/api/enquiry';
+  const FORM_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxi_Xhe_g5w1xNRz-nJ_oKASl3UgGgkHLTzA81x-abWoKVWVkDN6dgDh-mIDUYxe0vD/exec';
   if (dobInput) dobInput.max = new Date().toISOString().split('T')[0];
 
   function validateField(id, checkFn) {
@@ -1515,7 +1515,7 @@
 
         const response = await fetch(FORM_WEBHOOK_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload),
         });
 
