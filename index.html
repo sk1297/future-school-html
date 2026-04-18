@@ -214,158 +214,321 @@
     .mobile-menu a:hover { color: var(--primary); }
     .mobile-menu.open { display: flex; }
 
-    /* ── HERO ── */
+    /* ══════════════════════════════════════
+       HERO — premium redesign
+    ══════════════════════════════════════ */
     #hero {
-      min-height: 100vh; padding-top: 80px;
-      background-color: #06111f;
-      background-image:
-        radial-gradient(ellipse at 75% 10%, rgba(20,184,166,0.38) 0%, transparent 55%),
-        radial-gradient(ellipse at 8% 75%, rgba(255,122,89,0.30) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(15,40,90,0.9) 0%, transparent 80%),
-        linear-gradient(150deg, #06111f 0%, #0d1f3c 50%, #081828 100%);
+      min-height: 100vh;
+      padding-top: 80px;
+      background: #040d1a;
       display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
     }
+    /* aurora blobs */
+    .hero-aurora {
+      position: absolute; inset: 0; pointer-events: none;
+      overflow: hidden;
+    }
+    .aurora-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(72px); opacity: 0.55;
+      animation: aurora-drift 12s ease-in-out infinite alternate;
+    }
+    .aurora-blob.a { width:520px; height:520px; left:-140px; top:-80px;
+      background: radial-gradient(circle, #14b8a6 0%, #0ea5e9 60%, transparent 100%);
+      animation-duration: 14s; }
+    .aurora-blob.b { width:480px; height:480px; right:-100px; bottom:0;
+      background: radial-gradient(circle, #ff7a59 0%, #f43f5e 55%, transparent 100%);
+      animation-duration: 11s; animation-delay: -4s; }
+    .aurora-blob.c { width:360px; height:360px; left:42%; top:30%;
+      background: radial-gradient(circle, #818cf8 0%, #6366f1 60%, transparent 100%);
+      opacity: 0.35; animation-duration: 16s; animation-delay: -7s; }
+    @keyframes aurora-drift {
+      0%   { transform: translate(0,0) scale(1); }
+      50%  { transform: translate(30px,-20px) scale(1.08); }
+      100% { transform: translate(-20px,25px) scale(0.95); }
+    }
+    /* dot grid overlay */
     #hero::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px);
-      background-size: 38px 38px;
-      pointer-events: none; opacity: 0.45;
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
     }
+    /* mouse-follow shimmer */
     #hero::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at var(--mx,50%) var(--my,85%), rgba(255,255,255,0.18), transparent 46%);
-      mix-blend-mode: soft-light; pointer-events: none;
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.12) 0%, transparent 38%);
+      mix-blend-mode: soft-light;
     }
-    /* floating blobs */
-    .hero-deco { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(5px); animation: floatY 7s ease-in-out infinite; }
-    .hero-deco.one  { width:200px; height:200px; left:-60px;  top:18%;   background:radial-gradient(circle at 30% 30%,rgba(255,214,102,0.82),rgba(255,122,89,0.06)); }
-    .hero-deco.two  { width:260px; height:260px; right:-90px; top:22%;   background:radial-gradient(circle at 30% 30%,rgba(52,211,153,0.80),rgba(12,74,110,0.06)); animation-delay:-2.5s; }
-    .hero-deco.three{ width:160px; height:160px; right:16%;   bottom:-55px; background:radial-gradient(circle at 30% 30%,rgba(103,232,249,0.80),rgba(2,132,199,0.08)); animation-delay:-1.3s; }
+    /* bottom wave */
+    .hero-wave { position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; z-index: 3; }
+    .hero-wave svg { display: block; width: 100%; }
 
-    /* two-column hero layout */
+    /* layout */
     .hero-inner {
       position: relative; z-index: 2;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-      width: 100%; max-width: 1100px;
-      padding: 56px 40px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px; align-items: center;
+      width: 100%; max-width: 1160px;
+      padding: 60px 44px 80px;
     }
-    @media (max-width: 820px) {
-      .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 48px 20px; gap: 36px; }
-      .hero-text .hero-btns { justify-content: center; }
-      .hero-text .hero-stats { justify-content: center; }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 44px 20px 72px; gap: 44px; }
+      .hero-btns, .hero-stats { justify-content: center; }
       .hero-visual { order: -1; }
+      .hero-desc { margin: 0 auto 32px; }
     }
 
-    /* LEFT — text side */
-    .hero-text {}
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,122,89,0.95); color: #fff; padding: 7px 20px; border-radius: 50px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 28px; box-shadow: 0 8px 22px rgba(255,122,89,0.45); animation: pulse-badge 2.5s infinite; }
-    @keyframes pulse-badge { 0%,100%{box-shadow:0 6px 18px rgba(255,122,89,0.40)} 50%{box-shadow:0 12px 32px rgba(255,122,89,0.68)} }
-    .hero-title { font-family: 'Baloo 2', 'Sora', sans-serif; font-size: clamp(34px, 4.5vw, 62px); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 6px; letter-spacing: -0.5px; text-shadow: 0 16px 28px rgba(0,0,0,0.4); }
+    /* ── TEXT SIDE ── */
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, rgba(255,122,89,0.18), rgba(255,122,89,0.06));
+      border: 1px solid rgba(255,122,89,0.50);
+      color: #ffa07a; padding: 6px 18px; border-radius: 50px;
+      font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 22px;
+      animation: pulse-badge 3s ease-in-out infinite;
+    }
+    .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #ff7a59; animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    @keyframes pulse-badge { 0%,100%{box-shadow:0 0 0 0 rgba(255,122,89,0.0)} 50%{box-shadow:0 0 0 6px rgba(255,122,89,0.10)} }
+
+    .hero-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: clamp(38px, 5.2vw, 72px);
+      font-weight: 800; line-height: 1.05;
+      color: #fff; margin-bottom: 10px;
+      letter-spacing: -1px;
+    }
+    .hero-title .line1 { display: block; color: rgba(255,255,255,0.80); font-size: 0.55em; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
     .hero-title .highlight {
-      background: linear-gradient(90deg, #67e8f9 0%, #fef08a 50%, #ffd166 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent; display: block;
+      display: block;
+      background: linear-gradient(100deg, #5eead4 0%, #fef08a 45%, #fda26b 85%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    .hero-sub { font-size: clamp(14px, 2vw, 17px); color: rgba(255,255,255,0.88); font-weight: 600; margin-bottom: 14px; letter-spacing: 0.3px; }
-    .hero-sub span { background: rgba(20,184,166,0.22); border: 1px solid rgba(20,184,166,0.4); border-radius: 30px; padding: 3px 12px; font-size: 12px; font-weight: 700; color: #5eead4; margin-left: 8px; vertical-align: middle; }
-    .hero-desc { font-size: 15px; color: rgba(255,255,255,0.74); max-width: 480px; margin: 0 0 36px; line-height: 1.78; }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
-    .btn-hero-call { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(130deg,#ffffff,#d2faff); color: #0a4f4a; padding: 15px 30px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 12px 32px rgba(0,0,0,0.26); transition: transform 0.3s,box-shadow 0.3s; border: 2px solid transparent; }
-    .btn-hero-call:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(0,0,0,0.36); }
-    .btn-hero-wa  { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.07); color: #fff; padding: 13px 28px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; border: 2px solid rgba(255,255,255,0.44); transition: all 0.3s; backdrop-filter: blur(8px); }
-    .btn-hero-wa:hover  { background: rgba(255,255,255,0.16); border-color:#fff; transform: translateY(-4px); }
-    .hero-stats { display: flex; gap: 16px; flex-wrap: wrap; }
-    .stat-card { background: rgba(255,255,255,0.10); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.20); border-radius: 14px; padding: 16px 22px; text-align: center; min-width: 100px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.15); }
-    .stat-card .num { font-size: 28px; font-weight: 800; color: #fff1a8; line-height: 1; }
-    .stat-card .lbl { font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500; margin-top: 4px; }
 
-    /* RIGHT — logo visual side */
-    .hero-visual { display: flex; align-items: center; justify-content: center; }
-    .hero-logo-wrap {
+    .hero-location {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.60); font-size: 14px; font-weight: 500;
+      margin-bottom: 18px;
+    }
+    .hero-location .pill {
+      background: rgba(94,234,212,0.15); border: 1px solid rgba(94,234,212,0.35);
+      color: #5eead4; border-radius: 20px; padding: 3px 11px;
+      font-size: 11.5px; font-weight: 700; letter-spacing: 0.3px;
+    }
+
+    .hero-desc {
+      font-size: 15.5px; color: rgba(255,255,255,0.68);
+      max-width: 490px; line-height: 1.8; margin-bottom: 38px;
+    }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-hero-call {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #14b8a6, #0d9488);
+      color: #fff; padding: 15px 32px; border-radius: 50px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      box-shadow: 0 8px 28px rgba(20,184,166,0.45);
+      transition: transform 0.28s, box-shadow 0.28s; border: none;
+    }
+    .btn-hero-call:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(20,184,166,0.60); }
+    .btn-hero-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.07); color: #fff;
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.30);
+      backdrop-filter: blur(10px);
+      transition: all 0.28s;
+    }
+    .btn-hero-wa:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.7); transform: translateY(-4px); }
+
+    /* stat strip */
+    .hero-stats {
+      display: flex; gap: 0; flex-wrap: wrap;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px; overflow: hidden;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.05);
+      max-width: 480px;
+    }
+    .stat-card {
+      flex: 1; min-width: 90px;
+      padding: 16px 10px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.10);
       position: relative;
-      width: 320px; height: 320px;
+    }
+    .stat-card:last-child { border-right: none; }
+    .stat-card .num { font-size: 26px; font-weight: 800; color: #fff1a8; line-height: 1; font-family: 'Baloo 2', sans-serif; }
+    .stat-card .lbl { font-size: 10.5px; color: rgba(255,255,255,0.60); font-weight: 500; margin-top: 3px; letter-spacing: 0.3px; }
+
+    /* ── VISUAL SIDE ── */
+    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    .hero-scene {
+      position: relative;
+      width: 380px; height: 380px;
       display: flex; align-items: center; justify-content: center;
     }
-    /* pulsing glow rings */
-    .hero-logo-wrap::before,
-    .hero-logo-wrap::after {
-      content: ''; position: absolute; border-radius: 50%;
-      border: 1.5px solid rgba(20,184,166,0.35);
-      animation: ring-pulse 3s ease-out infinite;
-    }
-    .hero-logo-wrap::before { width: 100%; height: 100%; animation-delay: 0s; }
-    .hero-logo-wrap::after  { width: 82%;  height: 82%;  animation-delay: 0.8s; border-color: rgba(255,214,102,0.28); }
-    @keyframes ring-pulse {
-      0%   { transform: scale(0.95); opacity: 0.8; }
-      50%  { transform: scale(1.05); opacity: 0.4; }
-      100% { transform: scale(0.95); opacity: 0.8; }
-    }
-    .hero-logo-circle {
-      width: 240px; height: 240px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 38% 34%, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
-      border: 2px solid rgba(255,255,255,0.20);
-      backdrop-filter: blur(12px);
-      box-shadow:
-        0 0 60px rgba(20,184,166,0.28),
-        0 0 120px rgba(255,122,89,0.14),
-        inset 0 1px 0 rgba(255,255,255,0.25);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 10px;
-      animation: floatY 5s ease-in-out infinite;
-      overflow: hidden;
-    }
-    .hero-logo-img {
-      width: 150px; height: 150px;
-      object-fit: contain;
-      border-radius: 50%;
-      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.40));
-    }
-    /* fallback emoji when no logo */
-    .hero-logo-emoji { font-size: 72px; line-height: 1; }
-    .hero-logo-name {
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 12px; font-weight: 800;
-      color: rgba(255,255,255,0.88);
-      text-align: center; letter-spacing: 0.5px;
-      line-height: 1.3; padding: 0 16px;
-    }
-    /* floating badges around circle */
-    .hero-float-badge {
+    /* outer spinning ring */
+    .orbit-ring {
       position: absolute;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.22);
-      backdrop-filter: blur(10px);
-      border-radius: 40px;
-      padding: 8px 14px;
-      display: flex; align-items: center; gap: 7px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.14);
+      pointer-events: none;
+    }
+    .orbit-ring.r1 { width: 100%; height: 100%; animation: spin-slow 30s linear infinite; }
+    .orbit-ring.r2 { width: 78%;  height: 78%;  animation: spin-slow 22s linear infinite reverse; border-color: rgba(94,234,212,0.18); }
+
+    /* orbiting icon dots */
+    .orbit-icon {
+      position: absolute; width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1.5px solid rgba(255,255,255,0.20);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+      animation: counter-spin 30s linear infinite;
+    }
+    .orbit-icon.i2 { animation-duration: 30s; animation-direction: reverse; }
+    /* place icons on the ring using translate from center */
+    .pos-top    { transform: translateY(-190px); animation: counter-spin 30s linear infinite; }
+    .pos-right  { transform: translateX(190px);  animation: counter-spin 30s linear infinite; animation-delay: -7.5s; }
+    .pos-bottom { transform: translateY(190px);  animation: counter-spin 30s linear infinite; animation-delay: -15s; }
+    .pos-left   { transform: translateX(-190px); animation: counter-spin 30s linear infinite; animation-delay: -22.5s; }
+    @keyframes spin-slow    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+    @keyframes counter-spin { from { transform: rotate(0deg); }   to { transform: rotate(-360deg); } }
+
+    /* icon wrapper that actually orbits */
+    .orbit-item {
+      position: absolute; width: 42px; height: 42px;
+      transform-origin: center center;
+    }
+    /* the 4 orbit items placed by rotation + translate */
+    .orbit-item:nth-child(1) { animation: orbit 30s linear infinite; }
+    .orbit-item:nth-child(2) { animation: orbit 30s linear infinite; animation-delay: -7.5s; }
+    .orbit-item:nth-child(3) { animation: orbit 30s linear infinite; animation-delay: -15s; }
+    .orbit-item:nth-child(4) { animation: orbit 30s linear infinite; animation-delay: -22.5s; }
+    @keyframes orbit {
+      from { transform: rotate(0deg)   translateX(188px) rotate(0deg);   }
+      to   { transform: rotate(360deg) translateX(188px) rotate(-360deg);}
+    }
+    .orbit-dot {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px;
+      background: rgba(15,25,50,0.82);
+      border: 1.5px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.40);
+    }
+
+    /* glowing logo card */
+    .hero-logo-card {
+      width: 230px; height: 230px; border-radius: 36px;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06),
+        0 32px 80px rgba(0,0,0,0.55),
+        0 0 80px rgba(20,184,166,0.22),
+        0 0 160px rgba(99,102,241,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      animation: float-card 5s ease-in-out infinite;
+      position: relative; overflow: hidden; z-index: 2;
+    }
+    /* shimmer sweep */
+    .hero-logo-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+      background-size: 200% 200%;
+      animation: shimmer-sweep 4s ease-in-out infinite;
+    }
+    @keyframes shimmer-sweep {
+      0%   { background-position: 200% 200%; }
+      100% { background-position: -200% -200%; }
+    }
+    @keyframes float-card {
+      0%,100% { transform: translateY(0px) rotate(0deg); }
+      33%     { transform: translateY(-10px) rotate(0.6deg); }
+      66%     { transform: translateY(-5px) rotate(-0.4deg); }
+    }
+    .hero-logo-img  { width: 130px; height: 130px; object-fit: contain; border-radius: 24px; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.45)); position: relative; z-index: 1; }
+    .hero-logo-emoji { font-size: 68px; line-height: 1; position: relative; z-index: 1; }
+    .hero-logo-label {
+      font-family: 'Baloo 2', sans-serif; font-size: 12px; font-weight: 800;
+      color: rgba(255,255,255,0.82); text-align: center; letter-spacing: 0.3px;
+      line-height: 1.4; padding: 0 14px; position: relative; z-index: 1;
+    }
+
+    /* floating pill badges */
+    .hero-pill {
+      position: absolute; z-index: 4;
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 15px; border-radius: 40px;
       font-size: 12px; font-weight: 700; color: #fff;
       white-space: nowrap;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.22);
-      animation: floatY 6s ease-in-out infinite;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.30);
+      animation: floatY 5.5s ease-in-out infinite;
     }
-    .hero-float-badge.top-right  { top: 12px;  right: -10px; animation-delay: -1s; }
-    .hero-float-badge.mid-left   { left: -14px; top: 45%;  animation-delay: -2.2s; }
-    .hero-float-badge.bot-center { bottom: 10px; left: 50%; transform: translateX(-50%); animation-delay: -3s; }
-    .hero-float-badge i { font-size: 14px; color: #5eead4; }
-    .hero-float-badge.accent i  { color: #ffd166; }
-    .hero-float-badge.pink   i  { color: #f9a8d4; }
-    @media (max-width: 820px) {
-      .hero-logo-wrap { width: 240px; height: 240px; }
-      .hero-logo-circle { width: 180px; height: 180px; }
-      .hero-logo-img { width: 110px; height: 110px; }
-      .hero-logo-emoji { font-size: 52px; }
-      .hero-float-badge { font-size: 11px; padding: 6px 10px; }
+    .hero-pill .pill-icon { width:28px; height:28px; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+    .hero-pill.p1 { top: 14px; right: -24px; background: rgba(20,184,166,0.22); border: 1px solid rgba(20,184,166,0.40); animation-delay: 0s; }
+    .hero-pill.p1 .pill-icon { background: rgba(20,184,166,0.3); }
+    .hero-pill.p2 { bottom: 44px; left: -28px; background: rgba(255,122,89,0.20); border: 1px solid rgba(255,122,89,0.38); animation-delay: -2s; }
+    .hero-pill.p2 .pill-icon { background: rgba(255,122,89,0.3); }
+    .hero-pill.p3 { bottom: -4px; right: 18px; background: rgba(129,140,248,0.22); border: 1px solid rgba(129,140,248,0.40); animation-delay: -3.5s; }
+    .hero-pill.p3 .pill-icon { background: rgba(129,140,248,0.3); }
+
+    /* glow behind card */
+    .card-glow {
+      position: absolute; z-index: 1;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(20,184,166,0.30) 0%, rgba(99,102,241,0.20) 50%, transparent 80%);
+      filter: blur(32px);
+      animation: glow-pulse 4s ease-in-out infinite;
     }
+    @keyframes glow-pulse { 0%,100%{transform:scale(1);opacity:0.7} 50%{transform:scale(1.15);opacity:1} }
+
+    @media (max-width: 860px) {
+      .hero-scene { width: 280px; height: 280px; }
+      .hero-logo-card { width: 170px; height: 170px; border-radius: 28px; }
+      .hero-logo-img  { width: 96px; height: 96px; }
+      .hero-logo-emoji { font-size: 50px; }
+      .orbit-item { animation-name: orbit-sm !important; }
+      @keyframes orbit-sm {
+        from { transform: rotate(0deg)   translateX(138px) rotate(0deg);   }
+        to   { transform: rotate(360deg) translateX(138px) rotate(-360deg);}
+      }
+      .hero-pill.p1 { top: 8px;  right: -12px; font-size: 11px; }
+      .hero-pill.p2 { bottom: 32px; left: -8px; font-size: 11px; }
+      .hero-pill.p3 { display: none; }
+    }
+
+    /* scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.40); font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer; text-decoration: none;
+      animation: fade-bounce 2.2s ease-in-out infinite;
+    }
+    .hero-scroll .mouse {
+      width: 22px; height: 36px; border: 2px solid rgba(255,255,255,0.28); border-radius: 12px;
+      display: flex; justify-content: center; padding-top: 6px;
+    }
+    .hero-scroll .wheel { width: 3px; height: 7px; background: rgba(255,255,255,0.50); border-radius: 2px; animation: scroll-wheel 1.8s ease-in-out infinite; }
+    @keyframes scroll-wheel { 0%{transform:translateY(0);opacity:1} 80%{transform:translateY(8px);opacity:0} 100%{transform:translateY(0);opacity:0} }
+    @keyframes fade-bounce   { 0%,100%{opacity:0.5;transform:translateX(-50%) translateY(0)} 50%{opacity:0.9;transform:translateX(-50%) translateY(-5px)} }
+
     .magnetic { transition: transform 0.16s ease, box-shadow 0.28s ease; will-change: transform; }
-    .magnetic {
-      transition: transform 0.16s ease, box-shadow 0.28s ease;
-      will-change: transform;
-    }
     .trust-strip {
       background: #0f172a;
       color: #dbeafe;
@@ -1540,56 +1703,120 @@
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section id="hero" aria-label="Hero">
-  <div class="hero-deco one" aria-hidden="true"></div>
-  <div class="hero-deco two" aria-hidden="true"></div>
-  <div class="hero-deco three" aria-hidden="true"></div>
+
+  <!-- aurora background blobs -->
+  <div class="hero-aurora" aria-hidden="true">
+    <div class="aurora-blob a"></div>
+    <div class="aurora-blob b"></div>
+    <div class="aurora-blob c"></div>
+  </div>
 
   <div class="hero-inner">
 
-    <!-- LEFT: Text -->
+    <!-- ── LEFT: Text ── -->
     <div class="hero-text">
-      <div class="hero-badge" aria-live="polite"><i class="fas fa-star" aria-hidden="true"></i> Admissions Open 2026–27 · Limited Seats!</div>
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Admissions Open · 2026–27 · Limited Seats
+      </div>
+
       <h1 class="hero-title">
+        <span class="line1">Welcome to</span>
         Future
         <span class="highlight">Pre-Primary School</span>
       </h1>
-      <p class="hero-sub">Dhule, Maharashtra <span>🏅 First Digital School</span></p>
-      <p class="hero-desc">Nurturing young minds with smart education, play-based learning, and a safe, caring environment — because every child deserves the very best start.</p>
-      <div class="hero-btns">
-        <a href="tel:8830507689" class="btn-hero-call magnetic"><i class="fas fa-phone" aria-hidden="true"></i> Call Now</a>
-        <a href="https://wa.me/918830507689" target="_blank" rel="noopener" class="btn-hero-wa magnetic"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Us</a>
+
+      <div class="hero-location">
+        <i class="fas fa-location-dot" aria-hidden="true"></i>
+        Sakri Road, Dhule – 424001
+        <span class="pill">🏅 First Digital School</span>
       </div>
+
+      <p class="hero-desc">
+        Nurturing young minds with smart education, play-based learning, and a warm, safe environment — because every child deserves the very best start in life.
+      </p>
+
+      <div class="hero-btns">
+        <a href="tel:8830507689" class="btn-hero-call magnetic">
+          <i class="fas fa-phone" aria-hidden="true"></i> Call Now
+        </a>
+        <a href="https://wa.me/918830507689" target="_blank" rel="noopener" class="btn-hero-wa magnetic">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Us
+        </a>
+      </div>
+
       <div class="hero-stats" role="list">
-        <div class="stat-card" role="listitem"><div class="num" data-target="500" data-suffix="+">0</div><div class="lbl">Happy Students</div></div>
-        <div class="stat-card" role="listitem"><div class="num" data-target="10" data-suffix="+">0</div><div class="lbl">Expert Teachers</div></div>
-        <div class="stat-card" role="listitem"><div class="num">5★</div><div class="lbl">Parent Rating</div></div>
-        <div class="stat-card" role="listitem"><div class="num" data-target="8" data-suffix="+">0</div><div class="lbl">Years Experience</div></div>
+        <div class="stat-card" role="listitem">
+          <div class="num" data-target="500" data-suffix="+">0</div>
+          <div class="lbl">Happy Students</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="num" data-target="10" data-suffix="+">0</div>
+          <div class="lbl">Expert Teachers</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="num">5★</div>
+          <div class="lbl">Parent Rating</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="num" data-target="8" data-suffix="+">0</div>
+          <div class="lbl">Years Experience</div>
+        </div>
       </div>
     </div>
 
-    <!-- RIGHT: Logo Visual -->
+    <!-- ── RIGHT: Logo Visual ── -->
     <div class="hero-visual" aria-hidden="true">
-      <div class="hero-logo-wrap">
-        <!-- floating badges -->
-        <div class="hero-float-badge top-right accent">
-          <i class="fas fa-shield-halved"></i> Safe Campus
-        </div>
-        <div class="hero-float-badge mid-left">
-          <i class="fas fa-chalkboard-teacher"></i> Smart Classes
-        </div>
-        <div class="hero-float-badge bot-center pink">
-          <i class="fas fa-child-reaching"></i> Play &amp; Learn
-        </div>
-        <!-- main circle -->
-        <div class="hero-logo-circle" id="heroLogoCircle">
-          <!-- logo shown dynamically by JS; fallback emoji shown until logo loads -->
+      <div class="hero-scene">
+
+        <!-- orbit rings -->
+        <div class="orbit-ring r1"></div>
+        <div class="orbit-ring r2"></div>
+
+        <!-- orbiting icons -->
+        <div class="orbit-item"><div class="orbit-dot">📚</div></div>
+        <div class="orbit-item"><div class="orbit-dot">⭐</div></div>
+        <div class="orbit-item"><div class="orbit-dot">🎨</div></div>
+        <div class="orbit-item"><div class="orbit-dot">🎵</div></div>
+
+        <!-- glow behind card -->
+        <div class="card-glow"></div>
+
+        <!-- main logo card -->
+        <div class="hero-logo-card" id="heroLogoCircle">
           <span class="hero-logo-emoji" id="heroLogoEmoji">🏫</span>
-          <div class="hero-logo-name">Future Pre-Primary School<br>Dhule</div>
+          <div class="hero-logo-label">Future Pre-Primary<br>School · Dhule</div>
         </div>
+
+        <!-- floating pills -->
+        <div class="hero-pill p1">
+          <div class="pill-icon">🔒</div> Safe Campus
+        </div>
+        <div class="hero-pill p2">
+          <div class="pill-icon">🖥️</div> Smart Classes
+        </div>
+        <div class="hero-pill p3">
+          <div class="pill-icon">🌈</div> Play &amp; Learn
+        </div>
+
       </div>
     </div>
 
   </div>
+
+  <!-- scroll indicator -->
+  <a href="#about" class="hero-scroll" aria-label="Scroll down">
+    <div class="mouse"><div class="wheel"></div></div>
+    <span>Scroll</span>
+  </a>
+
+  <!-- bottom wave into trust strip -->
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 54" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0 27C240 54 480 0 720 27C960 54 1200 0 1440 27V54H0V27Z" fill="#0f172a"/>
+    </svg>
+  </div>
+
 </section>
 
 <div class="trust-strip" aria-hidden="true">
