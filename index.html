@@ -807,10 +807,10 @@
       background-size: 32px 32px;
       pointer-events: none;
     }
-    #contact .section-tag { color: #67e8f9; background: rgba(103,232,249,0.1); border-color: rgba(103,232,249,0.25); }
+    #contact .section-tag { color: #67e8f9; background: rgba(103,232,249,0.12); border-color: rgba(103,232,249,0.3); font-weight: 700; }
     #contact .section-title { color: #fff; }
     #contact .section-title span { color: #ffd166; }
-    #contact .section-desc { color: rgba(255,255,255,0.65); }
+    #contact .section-desc { color: rgba(255,255,255,0.82); }  /* increased from 0.65 → 0.82 for readability */
     #contact .section-divider { background: linear-gradient(90deg, #ffd166, #ff7a59); }
 
     .contact-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 48px; margin-top: 48px; align-items: start; }
@@ -834,7 +834,7 @@
       box-shadow: 0 8px 24px rgba(255,122,89,0.4);
     }
     .contact-info-header h3 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 3px; font-family: 'Sora', sans-serif; }
-    .contact-info-header p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .contact-info-header p { font-size: 12px; color: rgba(255,255,255,0.82); line-height: 1.5; }
 
     /* Redesigned contact cards */
     .contact-card {
@@ -851,8 +851,8 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 17px; flex-shrink: 0;
     }
-    .contact-card h4 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .contact-card p, .contact-card a { font-size: 14px; color: #fff; text-decoration: none; display: block; font-weight: 500; line-height: 1.6; }
+    .contact-card h4 { font-size: 11px; font-weight: 700; color: #94d5e8; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 5px; }
+    .contact-card p, .contact-card a { font-size: 14px; color: #e2f0f6; text-decoration: none; display: block; font-weight: 500; line-height: 1.7; }
     .contact-card a:hover { color: #ffd166; }
 
     /* School hours strip */
@@ -864,8 +864,8 @@
       display: flex; align-items: center; gap: 12px;
     }
     .contact-hours i { color: #34d399; font-size: 18px; flex-shrink: 0; }
-    .contact-hours span { font-size: 13px; color: #fff; font-weight: 600; }
-    .contact-hours small { display: block; font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; font-weight: 400; }
+    .contact-hours span { font-size: 13px; color: #fff; font-weight: 700; }
+    .contact-hours small { display: block; font-size: 12px; color: rgba(255,255,255,0.82); margin-top: 3px; font-weight: 400; }
 
     /* Action buttons — horizontal row */
     .contact-action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -898,13 +898,14 @@
     }
     .btn-maps:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(245,158,11,0.45); }
 
-    /* Map frame */
-    .map-frame { border-radius: 18px; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.45); border: 2px solid rgba(255,255,255,0.12); }
+    /* Map frame — override the generic rule for dark contact bg */
+    #contact .map-frame { border-radius: 18px !important; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.55) !important; border: 2px solid rgba(255,255,255,0.18) !important; height: 260px !important; }
 
     /* Form card */
     .contact-right { display: flex; flex-direction: column; gap: 24px; }
     .form-card {
       background: #fff;
+      color: var(--text);        /* force dark text — prevents white inheritance from dark section */
       border-radius: 24px;
       padding: 36px 32px;
       border: none;
@@ -923,8 +924,8 @@
       font-size: 22px;
       box-shadow: 0 8px 20px rgba(15,118,110,0.35);
     }
-    .form-card-header h3 { font-size: 20px; font-weight: 800; color: var(--secondary); margin-bottom: 3px; font-family: 'Sora', sans-serif; }
-    .form-card-header p { font-size: 13px; color: var(--text-light); margin: 0; }
+    .form-card-header h3 { font-size: 20px; font-weight: 800; color: #0b132b; margin-bottom: 3px; font-family: 'Sora', sans-serif; }
+    .form-card-header p { font-size: 13px; color: #5f6f83; margin: 0; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 13px; font-weight: 600; color: var(--text); }
@@ -1843,7 +1844,7 @@
       padding: 24px 0 !important;
     }
     .footer-bottom p {
-      color: #475569 !important;
+      color: #94a3b8 !important;   /* readable light gray on dark navy footer */
     }
     .footer-logo {
       background: linear-gradient(135deg, #ff7a59, #ef4444) !important;
