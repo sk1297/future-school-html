@@ -1775,6 +1775,186 @@
     .nav-cta {
       border-radius: 14px !important;
     }
+
+    /* ══════════════════════════════════════
+       PREMIUM DESIGN UPGRADE LAYER
+    ══════════════════════════════════════ */
+
+    /* ── Section tag pill upgrade ── */
+    .section-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(15,118,110,0.12), rgba(8,145,178,0.08));
+      border: 1px solid rgba(15,118,110,0.25);
+      border-radius: 50px;
+      padding: 5px 16px;
+      font-size: 11.5px;
+      letter-spacing: 2px;
+      color: var(--primary);
+    }
+
+    /* ── Button shine sweep ── */
+    .btn-hero-call, .nav-cta, .btn-submit {
+      position: relative; overflow: hidden;
+    }
+    .btn-hero-call::after, .nav-cta::after, .btn-submit::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-18deg);
+      transition: left 0.55s ease;
+      pointer-events: none;
+    }
+    .btn-hero-call:hover::after, .nav-cta:hover::after, .btn-submit:hover::after { left: 140%; }
+
+    /* ── Program card — image overlay header ── */
+    .program-header {
+      position: relative; overflow: hidden;
+      min-height: 180px;
+      padding: 28px 20px 24px;
+    }
+    .prog-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.32;
+      transition: opacity 0.4s, transform 0.6s;
+    }
+    .program-card:hover .prog-img { opacity: 0.45; transform: scale(1.06); }
+    .program-header::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.52) 100%);
+    }
+    .program-header .emoji,
+    .program-header h3,
+    .program-header .age { position: relative; z-index: 1; }
+
+    /* ── Program card — glass bottom ── */
+    .program-body {
+      background: #fff;
+      border-top: 3px solid;
+    }
+    .program-card:nth-child(1) .program-body { border-color: #ec4899; }
+    .program-card:nth-child(2) .program-body { border-color: #22c55e; }
+    .program-card:nth-child(3) .program-body { border-color: #f59e0b; }
+    .program-card:nth-child(4) .program-body { border-color: #0f766e; }
+
+    /* ── Activity card — image overlay ── */
+    .activity-top {
+      position: relative; overflow: hidden;
+      height: 190px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .act-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .activity-card:hover .act-img { transform: scale(1.08); }
+    .act-overlay {
+      position: absolute; inset: 0; z-index: 1;
+    }
+    .activity-top .emoji {
+      position: relative; z-index: 2;
+      font-size: 52px;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
+    }
+    .activity-bottom {
+      border-top: 3px solid;
+    }
+    .activity-card:nth-child(1) .activity-bottom { border-color: #f97316; }
+    .activity-card:nth-child(2) .activity-bottom { border-color: #ec4899; }
+    .activity-card:nth-child(3) .activity-bottom { border-color: #3b82f6; }
+    .activity-card:nth-child(4) .activity-bottom { border-color: #22c55e; }
+
+    /* ── Feature card accent border ── */
+    .feature-card {
+      border-left: 4px solid var(--border) !important;
+      transition: transform 0.32s, box-shadow 0.32s, border-color 0.2s;
+    }
+    .feature-card:nth-child(1) { border-left-color: #1d4ed8 !important; }
+    .feature-card:nth-child(2) { border-left-color: #dc2626 !important; }
+    .feature-card:nth-child(3) { border-left-color: #0e7490 !important; }
+    .feature-card:nth-child(4) { border-left-color: #15803d !important; }
+    .feature-card:nth-child(5) { border-left-color: #a16207 !important; }
+    .feature-card:nth-child(6) { border-left-color: #c2410c !important; }
+    .feature-card:hover {
+      transform: translateY(-8px) translateX(3px) !important;
+    }
+
+    /* ── Gallery masonry grid ── */
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+      grid-auto-rows: 200px;
+    }
+    .gallery-card { height: auto !important; }
+    .gallery-card.gc-tall { grid-row: span 2; }
+    .gallery-card.gc-wide { grid-column: span 2; }
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: 160px; }
+      .gallery-card.gc-wide { grid-column: span 1; }
+    }
+    @media (max-width: 520px) {
+      .gallery-grid { grid-template-columns: 1fr !important; grid-auto-rows: 180px; }
+      .gallery-card.gc-tall { grid-row: span 1; }
+    }
+
+    /* ── Testimonials — real avatar image ── */
+    .testi-avatar {
+      overflow: hidden !important;
+      border: 2px solid var(--primary-light);
+      box-shadow: 0 4px 12px rgba(15,118,110,0.18);
+    }
+    .testi-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .testi-card {
+      position: relative; overflow: hidden;
+    }
+    .testi-card::before {
+      content: '\201C';
+      position: absolute; top: 12px; right: 20px;
+      font-size: 96px; line-height: 1;
+      color: var(--primary);
+      opacity: 0.07;
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+
+    /* ── About section visual upgrade ── */
+    .about-card {
+      background: linear-gradient(145deg, #ffffff, #f0fdf9) !important;
+      border-top: 3px solid var(--primary) !important;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.2s;
+    }
+    .about-card:nth-child(2) { border-top-color: #dc2626 !important; }
+    .about-card:nth-child(3) { border-top-color: #a16207 !important; }
+    .about-card:nth-child(4) { border-top-color: #0e7490 !important; }
+    .about-card:nth-child(5) { border-top-color: #15803d !important; }
+    .about-card:nth-child(6) { border-top-color: #7c3aed !important; }
+    .about-card:hover {
+      transform: translateY(-10px) !important;
+      box-shadow: 0 20px 48px rgba(15,118,110,0.14) !important;
+    }
+
+    /* ── Step cards upgrade ── */
+    .step-card { padding: 12px 8px; }
+    .step-circle {
+      box-shadow: 0 12px 36px rgba(34,197,94,0.32), 0 0 0 8px rgba(34,197,94,0.08) !important;
+    }
+
+    /* ── Trust strip color dots ── */
+    .trust-item i { font-size: 14px; }
+
+    /* ── Scroll progress rainbow ── */
+    #scrollProgress {
+      background: linear-gradient(90deg,#0f766e,#22d3ee,#ffd166,#ff7a59,#f43f5e) !important;
+    }
+
   </style>
 </head>
 <body>
@@ -2057,27 +2237,42 @@
     <div class="programs-grid">
       <div class="program-card fade-up">
         <div class="program-header" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">
-          <span class="emoji" aria-hidden="true">🍼</span><h3>Play Group</h3><span class="age">1.5 – 2.5 Years</span>
+          <img class="prog-img" src="https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=700&h=360&fit=crop" alt="Toddler play group children" loading="lazy" />
+          <span class="emoji" aria-hidden="true">🍼</span>
+          <h3>Play Group</h3>
+          <span class="age">1.5 – 2.5 Years</span>
         </div>
-        <div class="program-body"><p>Gentle introduction to school life through songs, stories, and sensory play. Children develop social skills and basic motor abilities in a loving space.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+        <div class="program-body"><p>Gentle introduction to school life through songs, stories, and sensory play. Children develop social skills and basic motor abilities in a loving, nurturing space.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
       </div>
+
       <div class="program-card fade-up">
         <div class="program-header" style="background:linear-gradient(135deg,#22c55e,#10b981)">
-          <span class="emoji" aria-hidden="true">🌱</span><h3>Nursery</h3><span class="age">2.5 – 3.5 Years</span>
+          <img class="prog-img" src="https://images.pexels.com/photos/8613079/pexels-photo-8613079.jpeg?auto=compress&cs=tinysrgb&w=700&h=360&fit=crop" alt="Indian nursery class children learning" loading="lazy" />
+          <span class="emoji" aria-hidden="true">🌱</span>
+          <h3>Nursery</h3>
+          <span class="age">2.5 – 3.5 Years</span>
         </div>
-        <div class="program-body"><p>Building early language, number recognition, and creativity through guided activities, rhymes, and structured play in our digital classrooms.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+        <div class="program-body"><p>Building early language, number recognition, and creativity through guided activities, rhymes, and structured play in our Smart Digital Classrooms.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
       </div>
+
       <div class="program-card fade-up">
         <div class="program-header" style="background:linear-gradient(135deg,#f59e0b,#f97316)">
-          <span class="emoji" aria-hidden="true">⭐</span><h3>Jr. KG</h3><span class="age">3.5 – 4.5 Years</span>
+          <img class="prog-img" src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=700&h=360&fit=crop" alt="Indian Jr KG children classroom learning" loading="lazy" />
+          <span class="emoji" aria-hidden="true">⭐</span>
+          <h3>Jr. KG</h3>
+          <span class="age">3.5 – 4.5 Years</span>
         </div>
-        <div class="program-body"><p>Introducing letters, numbers, arts, and structured learning with interactive smart classes and engaging activity-based teaching methods.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+        <div class="program-body"><p>Introducing letters, numbers, arts, and structured learning with interactive smart classes and engaging activity-based teaching methods designed for young minds.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
       </div>
+
       <div class="program-card fade-up">
         <div class="program-header" style="background:linear-gradient(135deg,#0f766e,#06b6d4)">
-          <span class="emoji" aria-hidden="true">🚀</span><h3>Sr. KG</h3><span class="age">4.5 – 5.5 Years</span>
+          <img class="prog-img" src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=700&h=360&fit=crop" alt="Sr KG children ready for primary school" loading="lazy" />
+          <span class="emoji" aria-hidden="true">🚀</span>
+          <h3>Sr. KG</h3>
+          <span class="age">4.5 – 5.5 Years</span>
         </div>
-        <div class="program-body"><p>School readiness with reading, writing, math basics, and life skills — preparing every child for primary school with confidence and joy.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+        <div class="program-body"><p>School readiness with reading, writing, math basics, and life skills — preparing every child for primary school with confidence, curiosity, and joy.</p><a href="#contact">Enroll Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
       </div>
     </div>
   </div>
@@ -2113,10 +2308,43 @@
       <p class="section-desc">Every child has a hidden talent. Our activities help them discover, explore, and excel.</p>
     </div>
     <div class="activities-grid">
-      <div class="activity-card fade-up"><div class="activity-top" style="background:linear-gradient(135deg,#f97316,#ef4444)"><span class="emoji" aria-hidden="true">🧮</span></div><div class="activity-bottom"><h3>Abacus</h3><p>Develop mental math skills and concentration through the ancient and proven art of abacus learning.</p></div></div>
-      <div class="activity-card fade-up"><div class="activity-top" style="background:linear-gradient(135deg,#f97316,#fb7185)"><span class="emoji" aria-hidden="true">🎨</span></div><div class="activity-bottom"><h3>Arts &amp; Craft</h3><p>Unleash creativity with painting, clay, paper craft, and more. Every child is a natural artist!</p></div></div>
-      <div class="activity-card fade-up"><div class="activity-top" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)"><span class="emoji" aria-hidden="true">🗣️</span></div><div class="activity-bottom"><h3>Spoken English</h3><p>Build confidence and communication skills through fun interactive conversation classes and activities.</p></div></div>
-      <div class="activity-card fade-up"><div class="activity-top" style="background:linear-gradient(135deg,#22c55e,#0d9488)"><span class="emoji" aria-hidden="true">💡</span></div><div class="activity-bottom"><h3>Creative Learning</h3><p>Puzzle-solving, storytelling, and STEM-inspired activities that make every single day an exciting discovery.</p></div></div>
+
+      <div class="activity-card fade-up">
+        <div class="activity-top">
+          <img class="act-img" src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=600&h=380&fit=crop" alt="Abacus counting beads for mental math" loading="lazy" />
+          <div class="act-overlay" style="background:linear-gradient(135deg,rgba(249,115,22,0.78),rgba(239,68,68,0.72))"></div>
+          <span class="emoji" aria-hidden="true">🧮</span>
+        </div>
+        <div class="activity-bottom"><h3>Abacus Program</h3><p>Develop mental math skills, sharp concentration, and brain agility through the ancient and proven art of abacus learning from an early age.</p></div>
+      </div>
+
+      <div class="activity-card fade-up">
+        <div class="activity-top">
+          <img class="act-img" src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=600&h=380&fit=crop" alt="Indian children doing arts and crafts" loading="lazy" />
+          <div class="act-overlay" style="background:linear-gradient(135deg,rgba(249,115,22,0.78),rgba(251,113,133,0.72))"></div>
+          <span class="emoji" aria-hidden="true">🎨</span>
+        </div>
+        <div class="activity-bottom"><h3>Arts &amp; Craft</h3><p>Unleash creativity with painting, clay, paper craft, and more. Every child is a born artist waiting to be discovered!</p></div>
+      </div>
+
+      <div class="activity-card fade-up">
+        <div class="activity-top">
+          <img class="act-img" src="https://images.pexels.com/photos/8613060/pexels-photo-8613060.jpeg?auto=compress&cs=tinysrgb&w=600&h=380&fit=crop" alt="Children learning spoken English at school" loading="lazy" />
+          <div class="act-overlay" style="background:linear-gradient(135deg,rgba(59,130,246,0.78),rgba(6,182,212,0.72))"></div>
+          <span class="emoji" aria-hidden="true">🗣️</span>
+        </div>
+        <div class="activity-bottom"><h3>Spoken English</h3><p>Build confidence and communication skills through fun interactive conversation classes, storytelling, and activities that children love.</p></div>
+      </div>
+
+      <div class="activity-card fade-up">
+        <div class="activity-top">
+          <img class="act-img" src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=600&h=380&fit=crop" alt="Children creative learning activity at school" loading="lazy" />
+          <div class="act-overlay" style="background:linear-gradient(135deg,rgba(34,197,94,0.78),rgba(13,148,136,0.72))"></div>
+          <span class="emoji" aria-hidden="true">💡</span>
+        </div>
+        <div class="activity-bottom"><h3>Creative Learning</h3><p>Puzzle-solving, storytelling, and STEM-inspired activities that make every single day at Future School an exciting new discovery.</p></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2131,8 +2359,8 @@
       <p class="section-desc">A peek into the vibrant, safe, and stimulating world of Future Pre-Primary School.</p>
     </div>
     <div class="gallery-grid">
-      <!-- 1. Smart Digital Classroom: Indian classroom with digital board -->
-      <div class="gallery-card fade-up" role="button" tabindex="0" aria-label="Open Smart Digital Classroom" data-title="Smart Digital Classroom"
+      <!-- 1. Smart Digital Classroom: tall card -->
+      <div class="gallery-card gc-tall fade-up" role="button" tabindex="0" aria-label="Open Smart Digital Classroom" data-title="Smart Digital Classroom"
         data-image="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop"
         data-desc="Our Smart Digital Classroom uses interactive digital boards and visual learning tools — making every lesson exciting, modern, and memorable for every young learner.">
         <img src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop" alt="Indian children in smart digital classroom with interactive board" loading="lazy" />
@@ -2163,16 +2391,16 @@
         <span>Library Corner</span>
       </div>
 
-      <!-- 5. Music & Dance: children performing music or dance -->
-      <div class="gallery-card fade-up" role="button" tabindex="0" aria-label="Open Music and Dance" data-title="Music &amp; Dance"
+      <!-- 5. Music & Dance: wide card -->
+      <div class="gallery-card gc-wide fade-up" role="button" tabindex="0" aria-label="Open Music and Dance" data-title="Music &amp; Dance"
         data-image="https://images.pexels.com/photos/8613060/pexels-photo-8613060.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop"
         data-desc="Children sing, dance, and explore rhythm through fun music sessions that develop creativity, coordination, and joyful self-expression.">
         <img src="https://images.pexels.com/photos/8613060/pexels-photo-8613060.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop" alt="Indian school children enjoying music and dance activity" loading="lazy" />
         <span>Music &amp; Dance</span>
       </div>
 
-      <!-- 6. School Campus: Indian school building -->
-      <div class="gallery-card fade-up" role="button" tabindex="0" aria-label="Open School Campus" data-title="School Campus"
+      <!-- 6. School Campus: tall card -->
+      <div class="gallery-card gc-tall fade-up" role="button" tabindex="0" aria-label="Open School Campus" data-title="School Campus"
         data-image="https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop"
         data-desc="A clean, bright, and child-friendly campus designed for comfort and safety — with CCTV monitoring and warm, welcoming classroom environments throughout.">
         <img src="https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop" alt="School campus building view" loading="lazy" />
@@ -2241,18 +2469,33 @@
     <div class="testimonials-grid">
       <div class="testi-card fade-up">
         <div class="stars" aria-label="5 stars">★★★★★</div>
-        <blockquote>My son loves going to school every day! The teachers are so caring and the smart classes keep him engaged. Best decision we ever made.</blockquote>
-        <div class="testi-author"><div class="testi-avatar" aria-hidden="true">👩</div><div><strong>Priya Sharma</strong><em>Parent of Aarav (Jr. KG)</em></div></div>
+        <blockquote>My son loves going to school every day! The teachers are so caring and the smart digital classes keep him fully engaged. Best decision we ever made for our child.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-label="Priya Sharma">
+            <img src="https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Priya Sharma parent" loading="lazy" />
+          </div>
+          <div><strong>Priya Sharma</strong><em>Parent of Aarav (Jr. KG)</em></div>
+        </div>
       </div>
       <div class="testi-card fade-up">
         <div class="stars" aria-label="5 stars">★★★★★</div>
-        <blockquote>Excellent school! The CCTV and biometric security gave us complete peace of mind. Sneha has improved so much in just 3 months.</blockquote>
-        <div class="testi-author"><div class="testi-avatar" aria-hidden="true">👨</div><div><strong>Rahul Patil</strong><em>Parent of Sneha (Nursery)</em></div></div>
+        <blockquote>Excellent school! The CCTV and biometric security gave us complete peace of mind. Sneha has improved so much in just 3 months — we are truly amazed.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-label="Rahul Patil">
+            <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Rahul Patil parent" loading="lazy" />
+          </div>
+          <div><strong>Rahul Patil</strong><em>Parent of Sneha (Nursery)</em></div>
+        </div>
       </div>
       <div class="testi-card fade-up">
         <div class="stars" aria-label="5 stars">★★★★★</div>
         <blockquote>Future School is truly future-ready! The abacus and spoken English programs are amazing. Rohan speaks so confidently now.</blockquote>
-        <div class="testi-author"><div class="testi-avatar" aria-hidden="true">👩‍💼</div><div><strong>Sunita Jadhav</strong><em>Parent of Rohan (Sr. KG)</em></div></div>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-label="Sunita Jadhav">
+            <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Sunita Jadhav parent" loading="lazy" />
+          </div>
+          <div><strong>Sunita Jadhav</strong><em>Parent of Rohan (Sr. KG)</em></div>
+        </div>
       </div>
     </div>
   </div>
