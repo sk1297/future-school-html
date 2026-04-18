@@ -1440,57 +1440,7 @@
   const formNotice = document.getElementById('formNotice');
   const dobInput = document.getElementById('dob');
 
-  // ── TELEGRAM CONFIG ──
-  const TG_TOKEN = '8068735559:AAEjeVCbEEtR8aSY0Bqsmyhe8z0_SS7gYdg';
-  const TG_CHAT_ID = '8068735559';
-
   if (dobInput) dobInput.max = new Date().toISOString().split('T')[0];
-
-  function formatProgram(v) {
-    const map = { playgroup:'Play Group (1.5–2.5 yrs)', nursery:'Nursery (2.5–3.5 yrs)', jrkg:'Jr. KG (3.5–4.5 yrs)', srkg:'Sr. KG (4.5–5.5 yrs)' };
-    return map[v] || v;
-  }
-  function formatSource(v) {
-    const map = { google:'Google Search', facebook:'Facebook', friend:'Friend / Family Referral', walkin:'Walk-in', other:'Other' };
-    return map[v] || v;
-  }
-  function formatDate(v) {
-    if (!v) return '—';
-    const d = new Date(v);
-    return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-  }
-
-  async function sendTelegram(payload) {
-    const now = new Date().toLocaleString('en-IN', { timeZone:'Asia/Kolkata', day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
-    const msg = [
-      '🏫 <b>NEW ADMISSION ENQUIRY</b>',
-      '<b>Future Pre-Primary School, Dhule</b>',
-      '',
-      '━━━━━━━━━━━━━━━━━━━━',
-      `👤 <b>Parent:</b> ${payload.parentName}`,
-      `📱 <b>Phone:</b> ${payload.phone}`,
-      `📧 <b>Email:</b> ${payload.email}`,
-      '━━━━━━━━━━━━━━━━━━━━',
-      `👶 <b>Child:</b> ${payload.childName}`,
-      `🎂 <b>DOB:</b> ${formatDate(payload.dob)}`,
-      `📚 <b>Program:</b> ${formatProgram(payload.program)}`,
-      '━━━━━━━━━━━━━━━━━━━━',
-      `📅 <b>Preferred Start:</b> ${formatDate(payload.startDate) || '—'}`,
-      `🗓️ <b>Visit Date:</b> ${formatDate(payload.visitDate) || '—'}`,
-      `🔍 <b>Found Via:</b> ${formatSource(payload.source) || '—'}`,
-      `💬 <b>Comments:</b> ${payload.comments || '—'}`,
-      '━━━━━━━━━━━━━━━━━━━━',
-      `⏰ <b>Submitted:</b> ${now} IST`,
-    ].join('\n');
-
-    const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'HTML' }),
-    });
-    const data = await res.json();
-    if (!data.ok) throw new Error('Telegram error: ' + data.description);
-  }
 
   function validateField(id, checkFn) {
     const input = document.getElementById(id);
@@ -1563,7 +1513,13 @@
         payload.submittedAt = new Date().toISOString();
         payload.sourcePage = window.location.href;
 
-        await sendTelegram(payload);
+        const response = await fetch('/api/enquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        if (!result.ok) throw new Error(result.message || 'Submission failed.');
 
         form.style.display = 'none';
         formSuccess.classList.add('show');
