@@ -349,20 +349,18 @@
 
     /* stat strip */
     .hero-stats {
-      display: flex; gap: 0; flex-wrap: wrap;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px; overflow: hidden;
-      backdrop-filter: blur(14px);
-      background: rgba(255,255,255,0.05);
+      display: flex; gap: 10px; flex-wrap: wrap;
       max-width: 480px;
     }
     .stat-card {
       flex: 1; min-width: 90px;
       padding: 16px 10px; text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 14px;
+      backdrop-filter: blur(14px);
       position: relative;
     }
-    .stat-card:last-child { border-right: none; }
     .stat-card .num { font-size: 26px; font-weight: 800; color: #fff1a8; line-height: 1; font-family: 'Baloo 2', sans-serif; }
     .stat-card .lbl { font-size: 10.5px; color: rgba(255,255,255,0.60); font-weight: 500; margin-top: 3px; letter-spacing: 0.3px; }
 
