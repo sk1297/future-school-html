@@ -1542,25 +1542,85 @@
       submitBtn.disabled = true;
 
       try {
-        const raw = Object.fromEntries(new FormData(form).entries());
+        const raw        = Object.fromEntries(new FormData(form).entries());
+        const program    = PROGRAM_LABELS[raw.program] || raw.program || '—';
+        const source     = SOURCE_LABELS[raw.source]   || raw.source  || '—';
+        const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+        // ── Beautiful HTML email template ──
+        const htmlEmail = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
+<body style="margin:0;padding:0;background:#f0f4f8;font-family:Segoe UI,Arial,sans-serif;">
+<div style="max-width:680px;margin:28px auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.10);border:1px solid #dbe7f2;">
+
+  <!-- HEADER -->
+  <div style="background:linear-gradient(120deg,#0f766e,#ff7a59);padding:26px 30px;color:#fff;">
+    <div style="font-size:32px;margin-bottom:6px;">🏫</div>
+    <h1 style="margin:0 0 4px;font-size:21px;font-weight:700;">New Admission Enquiry</h1>
+    <div style="font-size:13px;opacity:0.9;">Future Pre-Primary School &nbsp;|&nbsp; First Digital School in Dhule</div>
+    <div style="font-size:13px;opacity:0.9;margin-top:2px;">Academic Year: ${CONFIG.admissionYear}</div>
+  </div>
+
+  <!-- ALERT -->
+  <div style="background:#fefce8;border-bottom:2px solid #fde68a;padding:11px 30px;font-size:13px;color:#92400e;">
+    ⚡ <strong>Action Required:</strong> Please call the parent within 24 hours.
+  </div>
+
+  <!-- BODY -->
+  <div style="background:#fff;padding:26px 30px;">
+
+    <!-- PARENT DETAILS -->
+    <div style="font-size:12px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">👤 Parent / Guardian</div>
+    <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;margin-bottom:22px;">
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;width:36%;border:1px solid #e5e7eb;">Parent Name</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${raw.parentName}</td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Phone</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;"><a href="tel:${raw.phone}" style="color:#0f766e;font-weight:600;text-decoration:none;">${raw.phone}</a></td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Email</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;"><a href="mailto:${raw.email}" style="color:#0f766e;text-decoration:none;">${raw.email}</a></td></tr>
+    </table>
+
+    <!-- CHILD DETAILS -->
+    <div style="font-size:12px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">👶 Child Details</div>
+    <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;margin-bottom:22px;">
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;width:36%;border:1px solid #e5e7eb;">Child Name</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${raw.childName}</td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Date of Birth</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${raw.dob || '—'}</td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Program Interest</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;"><strong style="color:#0f766e;">${program}</strong></td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Preferred Start</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${raw.startDate || '—'}</td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Preferred Visit</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${raw.visitDate || '—'}</td></tr>
+    </table>
+
+    <!-- ENQUIRY INFO -->
+    <div style="font-size:12px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📋 Enquiry Info</div>
+    <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;margin-bottom:22px;">
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;width:36%;border:1px solid #e5e7eb;">Found Us Via</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${source}</td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Comments</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${raw.comments || '—'}</td></tr>
+      <tr><td style="padding:9px 12px;background:#f8fafc;font-weight:600;font-size:13px;color:#374151;border:1px solid #e5e7eb;">Submitted At</td><td style="padding:9px 12px;font-size:14px;border:1px solid #e5e7eb;color:#111827;">${submittedAt} IST</td></tr>
+    </table>
+
+    <!-- QUICK ACTION BUTTONS -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="tel:${raw.phone}" style="display:inline-block;background:#0f766e;color:#fff;padding:11px 22px;border-radius:8px;text-decoration:none;font-weight:600;font-size:13px;">📞 Call Parent</a>
+      <a href="https://wa.me/91${raw.phone}" style="display:inline-block;background:#22c55e;color:#fff;padding:11px 22px;border-radius:8px;text-decoration:none;font-weight:600;font-size:13px;">💬 WhatsApp</a>
+      <a href="mailto:${raw.email}" style="display:inline-block;background:#0ea5e9;color:#fff;padding:11px 22px;border-radius:8px;text-decoration:none;font-weight:600;font-size:13px;">📧 Reply Email</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#f8fafc;border-top:1px solid #e5e7eb;padding:14px 30px;text-align:center;">
+    <p style="margin:0;font-size:12px;color:#9ca3af;">Future Pre-Primary School &nbsp;•&nbsp; 94, Satya Sai Baba Society, Sakri Road, Dhule – 424001</p>
+    <p style="margin:4px 0 0;font-size:12px;color:#9ca3af;">📞 8830507689 / 8830507869 &nbsp;•&nbsp; Mon–Sat 9AM–5PM</p>
+  </div>
+
+</div>
+</body>
+</html>`;
 
         const payload = {
-          access_key         : CONFIG.web3formsKey,
-          subject            : `🏫 New Admission Enquiry (${CONFIG.admissionYear}) — ${raw.parentName}`,
-          from_name          : 'Future Pre-Primary School Website',
-          replyto            : raw.email,
-          'Parent Name'      : raw.parentName,
-          'Phone'            : raw.phone,
-          'Email'            : raw.email,
-          'Child Name'       : raw.childName,
-          'Date of Birth'    : raw.dob       || '—',
-          'Program Interest' : PROGRAM_LABELS[raw.program] || raw.program,
-          'Preferred Start'  : raw.startDate || '—',
-          'Preferred Visit'  : raw.visitDate || '—',
-          'Found Us Via'     : SOURCE_LABELS[raw.source]   || raw.source || '—',
-          'Comments'         : raw.comments  || '—',
-          'Submitted At'     : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-          'Page URL'         : window.location.href,
+          access_key : CONFIG.web3formsKey,
+          subject    : `🏫 New Admission Enquiry (${CONFIG.admissionYear}) — ${raw.parentName}`,
+          from_name  : 'Future Pre-Primary School Website',
+          replyto    : raw.email,
+          html       : htmlEmail,
         };
 
         const res    = await fetch('https://api.web3forms.com/submit', {
