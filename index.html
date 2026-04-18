@@ -796,29 +796,135 @@
     .faq-a-inner ul li { margin-bottom: 4px; }
 
     /* ── CONTACT ── */
-    #contact { background: linear-gradient(180deg, #ffffff 0%, #eefbff 100%); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; margin-top: 48px; align-items: start; }
+    #contact {
+      background: linear-gradient(160deg, #0b132b 0%, #0f3460 55%, #0b132b 100%);
+      position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    #contact .section-tag { color: #67e8f9; background: rgba(103,232,249,0.1); border-color: rgba(103,232,249,0.25); }
+    #contact .section-title { color: #fff; }
+    #contact .section-title span { color: #ffd166; }
+    #contact .section-desc { color: rgba(255,255,255,0.65); }
+    #contact .section-divider { background: linear-gradient(90deg, #ffd166, #ff7a59); }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 48px; margin-top: 48px; align-items: start; }
 
     /* Contact info column */
-    .contact-info { display: flex; flex-direction: column; gap: 16px; }
-    .contact-card { background: var(--bg-soft); border-radius: var(--radius); padding: 20px 22px; display: flex; align-items: flex-start; gap: 16px; border: 1px solid var(--border); }
-    .contact-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .contact-card h4 { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .contact-card p, .contact-card a { font-size: 15px; color: var(--text); text-decoration: none; display: block; font-weight: 500; }
-    .contact-card a:hover { color: var(--primary); }
-    .contact-action-btns { display: flex; flex-direction: column; gap: 10px; }
-    .btn-call { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: #fff; padding: 15px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 8px 20px rgba(15,118,110,0.3); transition: all 0.3s; }
-    .btn-call:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 10px 26px rgba(15,118,110,0.45); }
-    .btn-wa { display: flex; align-items: center; justify-content: center; gap: 10px; background: #22c55e; color: #fff; padding: 15px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 4px 16px rgba(34,197,94,0.3); transition: all 0.3s; }
-    .btn-wa:hover { background: var(--green); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,197,94,0.4); }
-    .btn-maps { display: flex; align-items: center; justify-content: center; gap: 10px; background: #f59e0b; color: #fff; padding: 15px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 4px 16px rgba(245,158,11,0.3); transition: all 0.3s; }
-    .btn-maps:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,0.4); }
+    .contact-info { display: flex; flex-direction: column; gap: 14px; }
 
-    /* Google Form */
+    /* Info header banner */
+    .contact-info-header {
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 24px 22px;
+      display: flex; gap: 16px; align-items: center;
+    }
+    .contact-info-header .sch-logo-circle {
+      width: 58px; height: 58px; border-radius: 16px; flex-shrink: 0;
+      background: linear-gradient(135deg, #ffd166, #ff7a59);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 8px 24px rgba(255,122,89,0.4);
+    }
+    .contact-info-header h3 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 3px; font-family: 'Sora', sans-serif; }
+    .contact-info-header p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+    /* Redesigned contact cards */
+    .contact-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .contact-card:hover { background: rgba(255,255,255,0.11); transform: translateX(4px); }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .contact-card h4 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .contact-card p, .contact-card a { font-size: 14px; color: #fff; text-decoration: none; display: block; font-weight: 500; line-height: 1.6; }
+    .contact-card a:hover { color: #ffd166; }
+
+    /* School hours strip */
+    .contact-hours {
+      background: linear-gradient(135deg, rgba(15,118,110,0.35), rgba(6,182,212,0.25));
+      border: 1px solid rgba(20,184,166,0.35);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .contact-hours i { color: #34d399; font-size: 18px; flex-shrink: 0; }
+    .contact-hours span { font-size: 13px; color: #fff; font-weight: 600; }
+    .contact-hours small { display: block; font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; font-weight: 400; }
+
+    /* Action buttons — horizontal row */
+    .contact-action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-call {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      background: linear-gradient(135deg, #0f766e, #0891b2);
+      color: #fff; padding: 14px 12px; border-radius: 14px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      box-shadow: 0 8px 22px rgba(15,118,110,0.45);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .btn-call:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(15,118,110,0.55); }
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: #fff; padding: 14px 12px; border-radius: 14px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      box-shadow: 0 8px 22px rgba(34,197,94,0.4);
+      transition: all 0.3s;
+    }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(34,197,94,0.5); }
+    .btn-maps {
+      grid-column: span 2;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #fff; padding: 13px; border-radius: 14px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      box-shadow: 0 8px 22px rgba(245,158,11,0.35);
+      transition: all 0.3s;
+    }
+    .btn-maps:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(245,158,11,0.45); }
+
+    /* Map frame */
+    .map-frame { border-radius: 18px; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.45); border: 2px solid rgba(255,255,255,0.12); }
+
+    /* Form card */
     .contact-right { display: flex; flex-direction: column; gap: 24px; }
-    .form-card { background: linear-gradient(180deg, #ffffff, #f6fdff); border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-    .form-card h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .form-card p { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
+    .form-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 36px 32px;
+      border: none;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.28);
+    }
+    .form-card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    .form-card-icon {
+      width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0;
+      background: linear-gradient(135deg, #0f766e, #0891b2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 8px 20px rgba(15,118,110,0.35);
+    }
+    .form-card-header h3 { font-size: 20px; font-weight: 800; color: var(--secondary); margin-bottom: 3px; font-family: 'Sora', sans-serif; }
+    .form-card-header p { font-size: 13px; color: var(--text-light); margin: 0; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 13px; font-weight: 600; color: var(--text); }
@@ -1097,9 +1203,11 @@
 
       /* Contact */
       .contact-grid { grid-template-columns: 1fr; gap: 28px; }
-      .map-frame { height: 200px; }
-      .map-frame iframe { height: 200px; }
-      .contact-action-btns { flex-direction: column; }
+      .map-frame { height: 220px; }
+      .map-frame iframe { height: 220px; }
+      .contact-action-btns { grid-template-columns: 1fr 1fr; }
+      .form-card { padding: 24px 18px; }
+      .form-card-header { gap: 10px; }
 
       /* Form */
       .form-row { grid-template-columns: 1fr; }
@@ -2958,40 +3066,101 @@
 
 <!-- ═══════════════ CONTACT ═══════════════ -->
 <section id="contact">
-  <div class="container">
+  <div class="container" style="position:relative;z-index:1;">
     <div class="center fade-up">
       <span class="section-tag">Get In Touch</span>
       <h2 class="section-title">Contact <span>Us</span></h2>
       <div class="section-divider"></div>
-      <p class="section-desc">Fill the form below or reach us directly. We'd love to hear from you!</p>
+      <p class="section-desc">We're here for you. Reach out anytime — we'd love to welcome your child to the Future School family.</p>
     </div>
     <div class="contact-grid">
 
-      <!-- Left: Info + Action Buttons -->
+      <!-- ── Left: Info Column ── -->
       <div class="contact-info fade-up">
-        <div class="contact-card">
-          <div class="contact-icon" style="background:#dbeafe;color:#1d4ed8"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
-          <div><h4>Address</h4><p>94, Satya Sai Baba Society,<br>Sakri Road, Dhule – 424001<br>Maharashtra, India</p></div>
+
+        <!-- School identity header -->
+        <div class="contact-info-header">
+          <div class="sch-logo-circle" data-logo-holder aria-hidden="true">🏫</div>
+          <div>
+            <h3>Future Pre-Primary School</h3>
+            <p>Dhule's First Digital Pre-Primary School<br>Est. 2016 · Sakri Road, Dhule</p>
+          </div>
         </div>
+
+        <!-- Address -->
         <div class="contact-card">
-          <div class="contact-icon" style="background:#dcfce7;color:#15803d"><i class="fas fa-phone" aria-hidden="true"></i></div>
-          <div><h4>Phone</h4><a href="tel:8830507869">8830507869</a><a href="tel:8830507869">8830507869</a></div>
+          <div class="contact-icon" style="background:rgba(99,102,241,0.18);color:#818cf8">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h4>Our Address</h4>
+            <p>94, Satya Sai Baba Society,<br>Sakri Road, Dhule – 424001<br>Maharashtra, India</p>
+          </div>
         </div>
+
+        <!-- Phone -->
+        <div class="contact-card">
+          <div class="contact-icon" style="background:rgba(20,184,166,0.18);color:#34d399">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h4>Call Us</h4>
+            <a href="tel:8830507869">📞 8830507869</a>
+            <a href="https://wa.me/918830507869" target="_blank" rel="noopener">💬 WhatsApp: 8830507869</a>
+          </div>
+        </div>
+
+        <!-- Email (optional display) -->
+        <div class="contact-card">
+          <div class="contact-icon" style="background:rgba(245,158,11,0.18);color:#fbbf24">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h4>School Hours</h4>
+            <p>Monday – Saturday</p>
+            <p>9:00 AM – 1:30 PM</p>
+          </div>
+        </div>
+
+        <!-- School Hours strip -->
+        <div class="contact-hours">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <div>
+            <span>Admissions Open for 2026–27</span>
+            <small>Limited seats available · Enroll your child today</small>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
         <div class="contact-action-btns">
-          <a href="tel:8830507869" class="btn-call magnetic"><i class="fas fa-phone" aria-hidden="true"></i> Call Now</a>
-          <a href="https://wa.me/918830507869" target="_blank" rel="noopener" class="btn-wa magnetic"><i class="fab fa-whatsapp" aria-hidden="true"></i> Chat on WhatsApp</a>
-          <a href="https://www.google.com/maps/search/Future+Pre+Primary+School+94+Satya+Sai+Baba+Society+Sakri+Road+Dhule+Maharashtra" target="_blank" rel="noopener" class="btn-maps magnetic"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Get Directions</a>
+          <a href="tel:8830507869" class="btn-call magnetic">
+            <i class="fas fa-phone" aria-hidden="true"></i> Call Now
+          </a>
+          <a href="https://wa.me/918830507869" target="_blank" rel="noopener" class="btn-wa magnetic">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+          </a>
+          <a href="https://www.google.com/maps/search/Future+Pre+Primary+School+94+Satya+Sai+Baba+Society+Sakri+Road+Dhule+Maharashtra" target="_blank" rel="noopener" class="btn-maps magnetic">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Get Directions on Google Maps
+          </a>
         </div>
+
+        <!-- Map -->
         <div class="map-frame">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.5!2d74.7744!3d20.9042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdeb9e3a8e0c5a1%3A0x0!2s94%2C+Satya+Sai+Baba+Society%2C+Sakri+Rd%2C+Dhule%2C+Maharashtra+424001!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" title="Future Pre-Primary School Location Map"></iframe>
         </div>
+
       </div>
 
       <!-- Right: Enquiry Form -->
       <div class="contact-right fade-up">
         <div class="form-card">
-          <h3>📋 Admission Enquiry Form</h3>
-          <p>Fill in your details and we'll get back to you within 24 hours.</p>
+          <div class="form-card-header">
+            <div class="form-card-icon" aria-hidden="true">📋</div>
+            <div>
+              <h3>Admission Enquiry Form</h3>
+              <p>Fill in your details — we'll call you within 24 hours.</p>
+            </div>
+          </div>
 
           <!-- Success Message -->
           <div class="form-success" id="formSuccess" role="alert">
