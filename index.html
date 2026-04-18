@@ -1276,175 +1276,217 @@
 <button id="backTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 
 <script>
-  // ── HAMBURGER ──
+  'use strict';
+
+  /* ═══════════════════════════════════════════════
+     CONFIG — update these if school details change
+  ═══════════════════════════════════════════════ */
+  const CONFIG = {
+    schoolPhone    : '8830507689',
+    admissionYear  : '2026-27',
+    web3formsKey   : 'e8f964f2-8808-4657-b2ac-b5f87ab0488c',
+    logoSrc        : 'logo.png.jpeg',
+    loaderDelay    : 450,
+    loaderMaxWait  : 2400,
+  };
+
+  const PROGRAM_LABELS = {
+    playgroup : 'Play Group (1.5–2.5 yrs)',
+    nursery   : 'Nursery (2.5–3.5 yrs)',
+    jrkg      : 'Jr. KG (3.5–4.5 yrs)',
+    srkg      : 'Sr. KG (4.5–5.5 yrs)',
+  };
+
+  const SOURCE_LABELS = {
+    google   : 'Google Search',
+    facebook : 'Facebook',
+    friend   : 'Friend / Family Referral',
+    walkin   : 'Walk-in',
+    other    : 'Other',
+  };
+
+  /* ═══════════════════════════════════════════════
+     MOBILE NAVIGATION
+  ═══════════════════════════════════════════════ */
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
+
   hamburger.addEventListener('click', () => {
     const open = mobileMenu.classList.toggle('open');
     hamburger.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', open);
   });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', false);
-  }));
 
-  // ── INTRO LOADER ──
-  const siteLoader = document.getElementById('siteLoader');
+  mobileMenu.querySelectorAll('a').forEach(link =>
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    })
+  );
+
+  /* ═══════════════════════════════════════════════
+     SITE LOADER + LOGO
+  ═══════════════════════════════════════════════ */
+  const siteLoader  = document.getElementById('siteLoader');
   const logoHolders = document.querySelectorAll('[data-logo-holder]');
   const siteFavicon = document.getElementById('siteFavicon');
-  const brandLogoSrc = 'logo.png.jpeg';
-  const brandLogoProbe = new Image();
-  brandLogoProbe.onload = () => {
-    logoHolders.forEach((holder) => {
-      holder.innerHTML = `<img src="${brandLogoSrc}" class="brand-logo-img" alt="Future School logo" />`;
-    });
-    if (siteFavicon) siteFavicon.href = brandLogoSrc;
-  };
-  brandLogoProbe.src = brandLogoSrc;
-  const hideLoader = () => {
-    if (!siteLoader) return;
-    siteLoader.classList.add('hide');
-  };
-  window.addEventListener('load', () => setTimeout(hideLoader, 450));
-  setTimeout(hideLoader, 2400);
 
-  // ── SCROLL: navbar + back-to-top + active nav ──
-  const navbar = document.getElementById('navbar');
-  const backTop = document.getElementById('backTop');
+  const hideLoader = () => siteLoader && siteLoader.classList.add('hide');
+
+  const logoProbe = new Image();
+  logoProbe.onload = () => {
+    logoHolders.forEach(el => {
+      el.innerHTML = `<img src="${CONFIG.logoSrc}" class="brand-logo-img" alt="Future School logo" />`;
+    });
+    if (siteFavicon) siteFavicon.href = CONFIG.logoSrc;
+  };
+  logoProbe.src = CONFIG.logoSrc;
+
+  window.addEventListener('load', () => setTimeout(hideLoader, CONFIG.loaderDelay));
+  setTimeout(hideLoader, CONFIG.loaderMaxWait);
+
+  /* ═══════════════════════════════════════════════
+     SCROLL — navbar shadow, progress bar, active nav
+  ═══════════════════════════════════════════════ */
+  const navbar         = document.getElementById('navbar');
+  const backTop        = document.getElementById('backTop');
   const scrollProgress = document.getElementById('scrollProgress');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('section[id]');
-  const updateScrollUi = () => {
-    const y = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (y / docHeight) * 100 : 0;
-    if (navbar) navbar.classList.toggle('scrolled', y > 60);
-    if (backTop) backTop.classList.toggle('show', y > 400);
-    if (scrollProgress) scrollProgress.style.width = progress + '%';
+  const navLinks       = document.querySelectorAll('.nav-links a');
+  const sections       = document.querySelectorAll('section[id]');
 
-    // Active nav link + aria-current for accessibility
+  const updateScrollUi = () => {
+    const y         = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress  = docHeight > 0 ? (y / docHeight) * 100 : 0;
+
+    navbar        && navbar.classList.toggle('scrolled', y > 60);
+    backTop       && backTop.classList.toggle('show', y > 400);
+    scrollProgress && (scrollProgress.style.width = progress + '%');
+
     let current = '';
-    sections.forEach((s) => {
-      if (y >= s.offsetTop - 100) current = s.id;
-    });
-    navLinks.forEach((a) => {
+    sections.forEach(s => { if (y >= s.offsetTop - 100) current = s.id; });
+    navLinks.forEach(a => {
       const active = a.getAttribute('href') === '#' + current;
       a.classList.toggle('active', active);
       a.setAttribute('aria-current', active ? 'page' : 'false');
     });
   };
+
   let scrollTicking = false;
   window.addEventListener('scroll', () => {
     if (scrollTicking) return;
     scrollTicking = true;
-    requestAnimationFrame(() => {
-      updateScrollUi();
-      scrollTicking = false;
-    });
+    requestAnimationFrame(() => { updateScrollUi(); scrollTicking = false; });
   }, { passive: true });
   updateScrollUi();
 
-  // ── HERO PARALLAX ──
-  const hero = document.getElementById('hero');
+  /* ═══════════════════════════════════════════════
+     HERO — mouse parallax
+  ═══════════════════════════════════════════════ */
+  const hero      = document.getElementById('hero');
   const heroDecos = document.querySelectorAll('.hero-deco');
+
   if (hero && heroDecos.length) {
-    hero.addEventListener('mousemove', (e) => {
-      const r = hero.getBoundingClientRect();
+    hero.addEventListener('mousemove', e => {
+      const r  = hero.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
+      const py = (e.clientY - r.top)  / r.height - 0.5;
       hero.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
-      hero.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      hero.style.setProperty('--my', ((e.clientY - r.top)  / r.height) * 100 + '%');
       heroDecos.forEach((d, i) => {
-        const moveX = px * (12 + i * 8);
-        const moveY = py * (12 + i * 8);
-        d.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        d.style.transform = `translate(${px * (12 + i * 8)}px, ${py * (12 + i * 8)}px)`;
       });
     });
     hero.addEventListener('mouseleave', () => {
-      heroDecos.forEach((d) => {
-        d.style.transform = '';
-      });
+      heroDecos.forEach(d => d.style.transform = '');
       hero.style.setProperty('--mx', '50%');
       hero.style.setProperty('--my', '88%');
     });
   }
 
-  // ── CUSTOM CURSOR ──
-  const cursorDot = document.getElementById('cursorDot');
-  const cursorRing = document.getElementById('cursorRing');
-  const cursorEnabled = window.matchMedia('(min-width: 1025px)').matches && !window.matchMedia('(pointer: coarse)').matches;
+  /* ═══════════════════════════════════════════════
+     CUSTOM CURSOR (desktop only)
+  ═══════════════════════════════════════════════ */
+  const cursorDot     = document.getElementById('cursorDot');
+  const cursorRing    = document.getElementById('cursorRing');
+  const cursorEnabled = window.matchMedia('(min-width: 1025px)').matches
+                     && !window.matchMedia('(pointer: coarse)').matches;
+
   if (cursorEnabled && cursorDot && cursorRing) {
-    let ringX = window.innerWidth / 2;
-    let ringY = window.innerHeight / 2;
-    let dotX = ringX;
-    let dotY = ringY;
+    let dotX = window.innerWidth / 2, dotY = window.innerHeight / 2;
+    let ringX = dotX, ringY = dotY;
+
     document.body.classList.add('cursor-on');
 
-    window.addEventListener('mousemove', (e) => {
-      dotX = e.clientX;
-      dotY = e.clientY;
+    window.addEventListener('mousemove', e => {
+      dotX = e.clientX; dotY = e.clientY;
       cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
     }, { passive: true });
 
-    const tickCursor = () => {
+    (function tickCursor() {
       ringX += (dotX - ringX) * 0.18;
       ringY += (dotY - ringY) * 0.18;
       cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
       requestAnimationFrame(tickCursor);
-    };
-    tickCursor();
+    })();
 
     document.addEventListener('mousedown', () => document.body.classList.add('cursor-active'));
-    document.addEventListener('mouseup', () => document.body.classList.remove('cursor-active'));
-
-    document.querySelectorAll('a, button, .gallery-card, .faq-q, .magnetic').forEach((el) => {
+    document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-active'));
+    document.querySelectorAll('a, button, .gallery-card, .faq-q, .magnetic').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
     });
   }
 
-  // ── FAQ ACCORDION ──
-  const faqButtons = document.querySelectorAll('.faq-q');
-  faqButtons.forEach((btn, i) => {
-    const answer = btn.nextElementSibling;
-    if (!answer) return;
-    const panelId = `faq-panel-${i + 1}`;
-    answer.id = panelId;
-    answer.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-controls', panelId);
+  /* ═══════════════════════════════════════════════
+     FAQ ACCORDION
+  ═══════════════════════════════════════════════ */
+  document.querySelectorAll('.faq-q').forEach((btn, i) => {
+    const panel = btn.nextElementSibling;
+    if (!panel) return;
+    panel.id = `faq-panel-${i + 1}`;
+    panel.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-controls', panel.id);
   });
 
   function toggleFaq(btn) {
-    const answer = btn.nextElementSibling;
+    const panel  = btn.nextElementSibling;
     const isOpen = btn.getAttribute('aria-expanded') === 'true';
-    // Close all
+
     document.querySelectorAll('.faq-q').forEach(q => {
       q.setAttribute('aria-expanded', 'false');
       q.nextElementSibling.style.maxHeight = null;
       q.nextElementSibling.setAttribute('aria-hidden', 'true');
     });
-    // Open clicked if was closed
+
     if (!isOpen) {
       btn.setAttribute('aria-expanded', 'true');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-      answer.setAttribute('aria-hidden', 'false');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      panel.setAttribute('aria-hidden', 'false');
     }
   }
 
-  // ── FORM VALIDATION & SUBMISSION ──
-  const form = document.getElementById('admissionForm');
-  const submitBtn = document.getElementById('submitBtn');
+  /* ═══════════════════════════════════════════════
+     ADMISSION ENQUIRY FORM
+  ═══════════════════════════════════════════════ */
+  const form        = document.getElementById('admissionForm');
+  const submitBtn   = document.getElementById('submitBtn');
   const formSuccess = document.getElementById('formSuccess');
-  const formNotice = document.getElementById('formNotice');
-  const dobInput = document.getElementById('dob');
+  const formNotice  = document.getElementById('formNotice');
+  const dobInput    = document.getElementById('dob');
 
+  // Restrict DOB to today or earlier
   if (dobInput) dobInput.max = new Date().toISOString().split('T')[0];
+
+  // ── Validators ──
+  const isPhone  = v => /^[6-9]\d{9}$/.test(v);
+  const isEmail  = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const notEmpty = v => v.length > 0;
 
   function validateField(id, checkFn) {
     const input = document.getElementById(id);
-    const grp = document.getElementById('grp-' + id);
+    const grp   = document.getElementById('grp-' + id);
     if (!grp) return true;
     const valid = checkFn(input.value.trim());
     grp.classList.toggle('has-error', !valid);
@@ -1452,12 +1494,9 @@
     return valid;
   }
 
-  function isPhone(v) { return /^[6-9]\d{9}$/.test(v); }
-  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-  function notEmpty(v) { return v.length > 0; }
-  function showFormNotice(message) {
+  function showFormNotice(msg) {
     if (!formNotice) return;
-    formNotice.textContent = message;
+    formNotice.textContent = msg;
     formNotice.classList.add('show');
   }
   function clearFormNotice() {
@@ -1466,89 +1505,79 @@
     formNotice.classList.remove('show');
   }
 
-  // Live validation
-  ['parentName','phone','email','childName','dob','program'].forEach(id => {
-    const el = document.getElementById(id);
+  // ── Live field validation on blur / fix-on-input ──
+  ['parentName', 'phone', 'email', 'childName', 'dob', 'program'].forEach(id => {
+    const el    = document.getElementById(id);
+    const check = id === 'phone' ? isPhone : id === 'email' ? isEmail : notEmpty;
     if (!el) return;
-    el.addEventListener('blur', () => {
-      if (id === 'phone') validateField(id, isPhone);
-      else if (id === 'email') validateField(id, isEmail);
-      else validateField(id, notEmpty);
-    });
+    el.addEventListener('blur',  () => validateField(id, check));
     el.addEventListener('input', () => {
       const grp = document.getElementById('grp-' + id);
-      if (grp && grp.classList.contains('has-error')) {
-        if (id === 'phone') validateField(id, isPhone);
-        else if (id === 'email') validateField(id, isEmail);
-        else validateField(id, notEmpty);
-      }
+      if (grp && grp.classList.contains('has-error')) validateField(id, check);
     });
   });
 
+  // ── Form submit → Web3Forms API ──
   if (form && submitBtn && formSuccess) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       clearFormNotice();
-      // Validate required fields
-      const checks = [
+
+      const valid = [
         validateField('parentName', notEmpty),
-        validateField('phone', isPhone),
-        validateField('email', isEmail),
-        validateField('childName', notEmpty),
-        validateField('dob', notEmpty),
-        validateField('program', notEmpty),
-      ];
-      if (checks.some(v => !v)) {
-        // Scroll to first error
+        validateField('phone',      isPhone),
+        validateField('email',      isEmail),
+        validateField('childName',  notEmpty),
+        validateField('dob',        notEmpty),
+        validateField('program',    notEmpty),
+      ].every(Boolean);
+
+      if (!valid) {
         const firstErr = form.querySelector('.error');
         if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
-      // Show loading
+
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
-      try {
-        const fd = new FormData(form);
-        const data = Object.fromEntries(fd.entries());
 
-        const programMap = { playgroup:'Play Group (1.5–2.5 yrs)', nursery:'Nursery (2.5–3.5 yrs)', jrkg:'Jr. KG (3.5–4.5 yrs)', srkg:'Sr. KG (4.5–5.5 yrs)' };
-        const sourceMap  = { google:'Google Search', facebook:'Facebook', friend:'Friend / Family Referral', walkin:'Walk-in', other:'Other' };
+      try {
+        const raw = Object.fromEntries(new FormData(form).entries());
 
         const payload = {
-          access_key : 'e8f964f2-8808-4657-b2ac-b5f87ab0488c',
-          subject    : `🏫 New Admission Enquiry (2026-27) — ${data.parentName}`,
-          from_name  : 'Future Pre-Primary School Website',
-          replyto    : data.email,
-
-          // Form fields — formatted nicely for email
-          'Parent Name'        : data.parentName,
-          'Phone'              : data.phone,
-          'Email'              : data.email,
-          'Child Name'         : data.childName,
-          'Date of Birth'      : data.dob        || '—',
-          'Program Interest'   : programMap[data.program] || data.program,
-          'Preferred Start'    : data.startDate  || '—',
-          'Preferred Visit'    : data.visitDate  || '—',
-          'How They Found Us'  : sourceMap[data.source] || data.source || '—',
-          'Comments'           : data.comments   || '—',
-          'Submitted At'       : new Date().toLocaleString('en-IN', { timeZone:'Asia/Kolkata' }),
-          'Page URL'           : window.location.href,
+          access_key         : CONFIG.web3formsKey,
+          subject            : `🏫 New Admission Enquiry (${CONFIG.admissionYear}) — ${raw.parentName}`,
+          from_name          : 'Future Pre-Primary School Website',
+          replyto            : raw.email,
+          'Parent Name'      : raw.parentName,
+          'Phone'            : raw.phone,
+          'Email'            : raw.email,
+          'Child Name'       : raw.childName,
+          'Date of Birth'    : raw.dob       || '—',
+          'Program Interest' : PROGRAM_LABELS[raw.program] || raw.program,
+          'Preferred Start'  : raw.startDate || '—',
+          'Preferred Visit'  : raw.visitDate || '—',
+          'Found Us Via'     : SOURCE_LABELS[raw.source]   || raw.source || '—',
+          'Comments'         : raw.comments  || '—',
+          'Submitted At'     : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+          'Page URL'         : window.location.href,
         };
 
-        const response = await fetch('https://api.web3forms.com/submit', {
+        const res    = await fetch('https://api.web3forms.com/submit', {
           method  : 'POST',
           headers : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body    : JSON.stringify(payload),
         });
-        const result = await response.json();
+        const result = await res.json();
         if (!result.success) throw new Error(result.message || 'Submission failed.');
 
         form.style.display = 'none';
         formSuccess.classList.add('show');
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } catch (error) {
-        console.error(error);
-        showFormNotice('Unable to submit right now. Please try again or call us at 8830507689.');
+
+      } catch (err) {
+        console.error('Form error:', err);
+        showFormNotice(`Unable to submit right now. Please try again or call us at ${CONFIG.schoolPhone}.`);
       } finally {
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
