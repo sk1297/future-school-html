@@ -495,16 +495,19 @@
     }
     @keyframes glow-pulse { 0%,100%{transform:scale(1);opacity:0.7} 50%{transform:scale(1.15);opacity:1} }
 
+    @keyframes orbit-sm {
+      from { transform: rotate(0deg)   translateX(138px) rotate(0deg);   }
+      to   { transform: rotate(360deg) translateX(138px) rotate(-360deg);}
+    }
     @media (max-width: 860px) {
       .hero-scene { width: 280px; height: 280px; }
       .hero-logo-card { width: 170px; height: 170px; border-radius: 28px; }
       .hero-logo-img  { width: 96px; height: 96px; }
       .hero-logo-emoji { font-size: 50px; }
-      .orbit-item { animation-name: orbit-sm !important; }
-      @keyframes orbit-sm {
-        from { transform: rotate(0deg)   translateX(138px) rotate(0deg);   }
-        to   { transform: rotate(360deg) translateX(138px) rotate(-360deg);}
-      }
+      .orbit-item:nth-child(1) { animation-name: orbit-sm; }
+      .orbit-item:nth-child(2) { animation-name: orbit-sm; }
+      .orbit-item:nth-child(3) { animation-name: orbit-sm; }
+      .orbit-item:nth-child(4) { animation-name: orbit-sm; }
       .hero-pill.p1 { top: 8px;  right: -12px; font-size: 11px; }
       .hero-pill.p2 { bottom: 32px; left: -8px; font-size: 11px; }
       .hero-pill.p3 { display: none; }
@@ -1047,7 +1050,6 @@
       .form-row { grid-template-columns: 1fr; }
       .admission-cta { padding: 36px 24px; }
       .hero-deco { display: none; }
-      .hero-content { padding-top: 34px; }
       .hero-btns { margin-bottom: 40px; }
       .tilt-card > * { transform: none; }
       .lightbox-card { padding: 22px; border-radius: 18px; }
@@ -1070,8 +1072,25 @@
       .stat-card { padding: 14px 18px; min-width: 90px; }
       #faq .section-tag { margin-bottom: 6px; }
       #faq .section-title { font-size: clamp(42px, 13vw, 62px); }
-      .faq-wrap { margin-top: 18px; }
+      .faq-grid { margin-top: 18px; }
       .faq-q { font-size: clamp(20px, 7vw, 30px); }
+    }
+
+    @media(max-width:480px) {
+      .hero-inner { padding: 36px 16px 60px; }
+      .hero-title { font-size: clamp(30px, 9vw, 42px); }
+      .hero-scene { width: 220px; height: 220px; }
+      .hero-logo-card { width: 140px; height: 140px; border-radius: 22px; gap: 8px; }
+      .hero-logo-img  { width: 80px; height: 80px; }
+      .hero-logo-emoji { font-size: 42px; }
+      .hero-logo-label { font-size: 10px; }
+      .hero-pill.p2 { left: -4px; }
+      .hero-pill.p1 { right: -4px; }
+      .stat-card .num { font-size: 22px; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-q { font-size: 14px; padding: 14px 16px; }
+      .section-title { font-size: clamp(26px, 8vw, 38px) !important; }
     }
 
     /* ══════════════════════════════════════════
@@ -2225,7 +2244,7 @@
           <div class="faq-a-inner">Reach us anytime:
             <ul>
               <li>📞 Call: <strong>8830507689</strong> / <strong>8830507869</strong></li>
-              <li>💬 WhatsApp: <strong>+91 88305 07689</strong></li>
+              <li>💬 WhatsApp: <strong>8830507689</strong></li>
               <li>📍 Visit: 94, Satya Sai Baba Society, Sakri Road, Dhule</li>
               <li>🕘 Office Hours: Mon–Sat, 9 AM – 5 PM</li>
             </ul>
@@ -2321,7 +2340,7 @@
             <div class="form-row">
               <div class="form-group" id="grp-program">
                 <label for="program">Program Interest <span class="req">*</span></label>
-                <select id="program" name="program">
+                <select id="program" name="program" required aria-required="true">
                   <option value="">Select program</option>
                   <option value="playgroup">Play Group (1.5–2.5 yrs)</option>
                   <option value="nursery">Nursery (2.5–3.5 yrs)</option>
@@ -2391,9 +2410,9 @@
         </div>
         <p>Nurturing young minds with smart education, creativity, and a safe environment. Your child's bright future starts here at Future School.</p>
         <div class="social-links" aria-label="Social media links">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="Future School on Facebook" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Future School on Instagram" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Future School on YouTube" rel="noopener"><i class="fab fa-youtube"></i></a>
           <a href="https://wa.me/918830507689" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
@@ -2435,7 +2454,7 @@
 
 <!-- Floating Buttons -->
 <a href="https://wa.me/918830507689" target="_blank" rel="noopener" id="waFloat" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-<button id="backTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+<button id="backTop" type="button" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 
 <script>
   'use strict';
@@ -2552,7 +2571,7 @@
      HERO — mouse parallax
   ═══════════════════════════════════════════════ */
   const hero      = document.getElementById('hero');
-  const heroDecos = document.querySelectorAll('.hero-deco');
+  const heroDecos = document.querySelectorAll('.aurora-blob');
 
   if (hero && heroDecos.length) {
     hero.addEventListener('mousemove', e => {
@@ -2645,8 +2664,20 @@
   const formNotice  = document.getElementById('formNotice');
   const dobInput    = document.getElementById('dob');
 
-  // Restrict DOB to today or earlier
-  if (dobInput) dobInput.max = new Date().toISOString().split('T')[0];
+  // Restrict DOB to last 7 years (pre-primary age range)
+  if (dobInput) {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    dobInput.max = todayStr;
+    const minDate = new Date(today.getFullYear() - 7, today.getMonth(), today.getDate());
+    dobInput.min = minDate.toISOString().split('T')[0];
+  }
+  // Restrict start/visit date to future dates only
+  const startDateInput = document.getElementById('startDate');
+  const visitDateInput = document.getElementById('visitDate');
+  const todayStr = new Date().toISOString().split('T')[0];
+  if (startDateInput) startDateInput.min = todayStr;
+  if (visitDateInput) visitDateInput.min = todayStr;
 
   // ── Validators ──
   const isPhone  = v => /^[6-9]\d{9}$/.test(v);
