@@ -1,4 +1,5 @@
 ﻿const SHEET_NAME = 'Admissions';
+const SPREADSHEET_ID = '1oVou6ab86xTMdE9nOGwFIY3gMrsuxrYSHnn718fpRfM';
 const NOTIFY_EMAIL = 'swapnilks1297@gmail.com';
 
 const SCHOOL_NAME = 'Future Pre-Primary School';
@@ -26,7 +27,7 @@ function doPost(e) {
     const clean = normalizeData_(data);
     const receivedAt = new Date();
 
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     const sheet = getOrCreateSheet_(ss, SHEET_NAME);
     ensureHeader_(sheet);
     sheet.appendRow(toSheetRow_(clean, receivedAt));
