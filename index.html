@@ -3,8 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Future Pre-Primary School – First Digital School in Dhule</title>
-  <meta name="description" content="Future Pre-Primary School – Admissions open for Play Group, Nursery, Jr. KG, Sr. KG. Smart classes, CCTV security, expert teachers in Dhule." />
+  <title>Future Pre-Primary School – Dhule's First Digital Pre-Primary School | Admissions Open 2026-27</title>
+  <meta name="description" content="Future Pre-Primary School – Dhule's most trusted digital pre-primary school. Admissions open 2026-27 for Play Group, Nursery, Jr. KG & Sr. KG. Smart classes, CCTV security, expert teachers. Call 8830507869." />
+  <meta name="keywords" content="pre-primary school Dhule, kindergarten Dhule, best preschool Dhule, digital school Dhule, play group nursery Jr KG Sr KG admission, Future Pre Primary School" />
+  <link rel="canonical" href="https://future-school-html.swapnilks1297.workers.dev/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Future Pre-Primary School – Dhule's First Digital Pre-Primary School" />
+  <meta property="og:description" content="Admissions open 2026-27. Smart classes, expert teachers, safe campus. Dhule's most trusted pre-primary school since 2016." />
+  <meta property="og:url" content="https://future-school-html.swapnilks1297.workers.dev/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Future Pre-Primary School – Dhule" />
+  <meta name="twitter:description" content="Dhule's First Digital Pre-Primary School. Admissions Open 2026-27. Call 8830507869." />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Future Pre-Primary School",
+    "description": "Dhule's first and most advanced digital pre-primary school offering Play Group, Nursery, Jr. KG and Sr. KG programs.",
+    "url": "https://future-school-html.swapnilks1297.workers.dev/",
+    "telephone": "+91-8830507869",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "94, Satya Sai Baba Society, Sakri Road",
+      "addressLocality": "Dhule",
+      "addressRegion": "Maharashtra",
+      "postalCode": "424001",
+      "addressCountry": "IN"
+    },
+    "openingHours": "Mo-Sa 09:00-13:30",
+    "foundingDate": "2016",
+    "priceRange": "₹₹"
+  }
+  </script>
   <link id="siteFavicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -549,35 +583,41 @@
     .magnetic { transition: transform 0.16s ease, box-shadow 0.28s ease; will-change: transform; }
     .trust-strip {
       background: #0f172a;
-      color: #dbeafe;
       border-top: 1px solid rgba(255,255,255,0.1);
       border-bottom: 1px solid rgba(255,255,255,0.12);
-      overflow: hidden;
-      padding: 14px 0;
+      padding: 20px 0;
     }
     .trust-track {
-      display: flex;
-      width: max-content;
-      gap: 38px;
-      align-items: center;
-      animation: ticker 34s linear infinite;
-      will-change: transform;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
     }
-    .trust-strip:hover .trust-track { animation-play-state: paused; }
     .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 16px;
+      text-align: center;
+      color: #e2e8f0;
       font-size: 13px;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      white-space: nowrap;
-      opacity: 0.92;
+      font-weight: 500;
+      border-right: 1px solid rgba(255,255,255,0.08);
     }
+    .trust-item:last-child { border-right: none; }
     .trust-item i {
-      margin-right: 8px;
+      font-size: 20px;
       color: #5eead4;
+      margin-bottom: 2px;
     }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .trust-item strong { font-size: 15px; font-weight: 700; color: #f1f5f9; }
+    @media (max-width: 768px) {
+      .trust-track { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .trust-item:nth-child(3) { border-right: none; }
+      .trust-item:nth-child(4), .trust-item:nth-child(5) { display: none; }
     }
 
     /* ── ABOUT ── */
@@ -971,6 +1011,63 @@
     .success-icon { font-size: 56px; margin-bottom: 16px; }
     .form-success h4 { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
     .form-success p { font-size: 14px; color: var(--text-light); }
+
+    /* ── MULTI-STEP FORM ── */
+    .step-progress {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 28px;
+    }
+    .step-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #e2e8f0; color: #94a3b8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+      transition: all 0.3s ease; position: relative; z-index: 1;
+    }
+    .step-dot.active { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(15,118,110,0.4); }
+    .step-dot.done { background: #10b981; color: #fff; }
+    .step-dot.done::after { content: '✓'; }
+    .step-dot.done span { display: none; }
+    .step-line {
+      flex: 1; height: 2px; background: #e2e8f0;
+      transition: background 0.3s ease; max-width: 60px;
+    }
+    .step-line.done { background: #10b981; }
+    .step-label {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 4px; font-size: 11px; font-weight: 600; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .step-label.active { color: var(--primary); }
+    .step-label.done { color: #10b981; }
+    .step-progress-wrap {
+      display: flex; align-items: flex-start; gap: 0;
+      margin-bottom: 28px; justify-content: center;
+    }
+    .step-node { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .step-connector { width: 60px; height: 2px; background: #e2e8f0; margin-top: 15px; flex-shrink: 0; transition: background 0.3s; }
+    .step-connector.done { background: #10b981; }
+    .form-step { display: none; animation: fadeStepIn 0.3s ease; }
+    .form-step.active { display: block; }
+    @keyframes fadeStepIn { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+    .form-step-nav {
+      display: flex; gap: 12px; margin-top: 20px;
+    }
+    .btn-prev {
+      flex: 1; padding: 13px; background: #f1f5f9; color: #475569;
+      border: 1.5px solid #e2e8f0; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-prev:hover { background: #e2e8f0; }
+    .btn-next {
+      flex: 2; padding: 13px; background: linear-gradient(120deg, var(--primary), #0891b2);
+      color: #fff; border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 20px rgba(15,118,110,0.3);
+    }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15,118,110,0.44); }
+    .step-hint { font-size: 12px; color: #94a3b8; margin-top: 10px; text-align: center; }
     .map-frame { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); height: 280px; border: 1px solid var(--border); }
     .map-frame iframe { width: 100%; height: 100%; border: none; }
 
@@ -2054,6 +2151,14 @@
 </div>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+<!-- ═══════════════ ADMISSION BANNER ═══════════════ -->
+<div id="admissionBanner" style="background:linear-gradient(90deg,#0f766e,#0891b2);color:#fff;text-align:center;padding:10px 20px;font-size:13px;font-weight:600;letter-spacing:0.3px;position:relative;z-index:200;">
+  <i class="fas fa-graduation-cap" style="margin-right:8px;"></i>
+  Admissions Open for 2026–27 &nbsp;·&nbsp; Limited Seats Available &nbsp;·&nbsp;
+  <a href="tel:8830507869" style="color:#ffd166;font-weight:700;text-decoration:none;">Call 8830507869</a>
+  <button onclick="this.parentElement.style.display='none'" aria-label="Close banner" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;line-height:1;">×</button>
+</div>
+
 <div id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ═══════════════ NAVBAR ═══════════════ -->
@@ -2130,11 +2235,11 @@
       </p>
 
       <div class="hero-btns">
-        <a href="tel:8830507869" class="btn-hero-call magnetic">
-          <i class="fas fa-phone" aria-hidden="true"></i> Call Now
+        <a href="#contact" class="btn-hero-call magnetic">
+          <i class="fas fa-school" aria-hidden="true"></i> Book School Tour
         </a>
-        <a href="https://wa.me/918830507869" target="_blank" rel="noopener" class="btn-hero-wa magnetic">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Us
+        <a href="tel:8830507869" class="btn-hero-wa magnetic">
+          <i class="fas fa-phone" aria-hidden="true"></i> Call Now
         </a>
       </div>
 
@@ -2212,18 +2317,33 @@
 
 </section>
 
-<div class="trust-strip" aria-hidden="true">
+<div class="trust-strip">
   <div class="trust-track">
-    <span class="trust-item"><i class="fas fa-shield-heart"></i>24x7 CCTV Monitoring</span>
-    <span class="trust-item"><i class="fas fa-chalkboard"></i>Interactive Smart Boards</span>
-    <span class="trust-item"><i class="fas fa-fingerprint"></i>Biometric Attendance</span>
-    <span class="trust-item"><i class="fas fa-graduation-cap"></i>Trained Early Education Experts</span>
-    <span class="trust-item"><i class="fas fa-child-reaching"></i>Play Based Curriculum</span>
-    <span class="trust-item"><i class="fas fa-shield-heart"></i>24x7 CCTV Monitoring</span>
-    <span class="trust-item"><i class="fas fa-chalkboard"></i>Interactive Smart Boards</span>
-    <span class="trust-item"><i class="fas fa-fingerprint"></i>Biometric Attendance</span>
-    <span class="trust-item"><i class="fas fa-graduation-cap"></i>Trained Early Education Experts</span>
-    <span class="trust-item"><i class="fas fa-child-reaching"></i>Play Based Curriculum</span>
+    <div class="trust-item">
+      <i class="fas fa-shield-heart"></i>
+      <strong>16 CCTV</strong>
+      Safe Campus
+    </div>
+    <div class="trust-item">
+      <i class="fas fa-chalkboard"></i>
+      <strong>Smart Classes</strong>
+      Digital Learning
+    </div>
+    <div class="trust-item">
+      <i class="fas fa-fingerprint"></i>
+      <strong>Biometric</strong>
+      Attendance System
+    </div>
+    <div class="trust-item">
+      <i class="fas fa-graduation-cap"></i>
+      <strong>500+ Students</strong>
+      Happy Families
+    </div>
+    <div class="trust-item">
+      <i class="fas fa-star"></i>
+      <strong>5★ Rated</strong>
+      Parent Reviews
+    </div>
   </div>
 </div>
 
@@ -3148,84 +3268,111 @@
             <p>We've received your enquiry. Our team will call you within 24 hours to discuss admission details.</p>
           </div>
 
-          <!-- Form -->
+          <!-- Multi-step Form -->
           <form id="admissionForm" novalidate>
-            <!-- Honeypot: hidden from humans, bots fill this — checked server-side -->
+            <!-- Honeypot -->
             <div style="position:absolute;left:-9999px;top:-9999px;visibility:hidden;" aria-hidden="true">
               <label for="_hp">Leave this empty</label>
               <input type="text" id="_hp" name="_hp" tabindex="-1" autocomplete="off" />
             </div>
-            <div class="form-row">
+
+            <!-- Step Progress -->
+            <div class="step-progress-wrap" id="stepProgress" role="group" aria-label="Form progress">
+              <div class="step-node">
+                <div class="step-dot active" id="sdot1"><span>1</span></div>
+                <div class="step-label active" id="slbl1">Your Info</div>
+              </div>
+              <div class="step-connector" id="scon1"></div>
+              <div class="step-node">
+                <div class="step-dot" id="sdot2"><span>2</span></div>
+                <div class="step-label" id="slbl2">Child's Info</div>
+              </div>
+              <div class="step-connector" id="scon2"></div>
+              <div class="step-node">
+                <div class="step-dot" id="sdot3"><span>3</span></div>
+                <div class="step-label" id="slbl3">Final Details</div>
+              </div>
+            </div>
+
+            <!-- STEP 1: Parent Info -->
+            <div class="form-step active" id="formStep1">
               <div class="form-group" id="grp-parentName">
-                <label for="parentName">Parent/Guardian Name <span class="req">*</span></label>
+                <label for="parentName">Parent / Guardian Name <span class="req">*</span></label>
                 <input type="text" id="parentName" name="parentName" placeholder="e.g. Rahul Sharma" autocomplete="name" />
                 <span class="err-msg">Please enter your name.</span>
               </div>
-              <div class="form-group" id="grp-phone">
+              <div class="form-group" id="grp-phone" style="margin-top:14px;">
                 <label for="phone">Phone Number <span class="req">*</span></label>
-                <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" autocomplete="tel" />
+                <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" autocomplete="tel" maxlength="10" />
                 <span class="err-msg">Enter a valid 10-digit number.</span>
               </div>
+              <div class="form-group" id="grp-email" style="margin-top:14px;">
+                <label for="email">Email Address <span class="req">*</span></label>
+                <input type="email" id="email" name="email" placeholder="e.g. name@email.com" autocomplete="email" />
+                <span class="err-msg">Please enter a valid email address.</span>
+              </div>
+              <div class="form-step-nav">
+                <button type="button" class="btn-next" onclick="nextStep(1)">Continue <i class="fas fa-arrow-right"></i></button>
+              </div>
+              <p class="step-hint">Step 1 of 3 &nbsp;·&nbsp; We'll call you within 24 hours</p>
             </div>
-            <div class="form-group" id="grp-email">
-              <label for="email">Email Address <span class="req">*</span></label>
-              <input type="email" id="email" name="email" placeholder="e.g. name@email.com" autocomplete="email" />
-              <span class="err-msg">Please enter a valid email address.</span>
-            </div>
-            <div class="form-row">
+
+            <!-- STEP 2: Child Info -->
+            <div class="form-step" id="formStep2">
               <div class="form-group" id="grp-childName">
                 <label for="childName">Child's Name <span class="req">*</span></label>
                 <input type="text" id="childName" name="childName" placeholder="Child's full name" />
                 <span class="err-msg">Please enter your child's name.</span>
               </div>
-              <div class="form-group" id="grp-dob">
+              <div class="form-group" id="grp-dob" style="margin-top:14px;">
                 <label for="dob">Child's Date of Birth <span class="req">*</span></label>
                 <input type="date" id="dob" name="dob" />
                 <span class="err-msg">Please select date of birth.</span>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group" id="grp-program">
+              <div class="form-group" id="grp-program" style="margin-top:14px;">
                 <label for="program">Program Interest <span class="req">*</span></label>
                 <select id="program" name="program" required aria-required="true">
                   <option value="">Select program</option>
                   <option value="playgroup">Play Group (1.5–2.5 yrs)</option>
                   <option value="nursery">Nursery (2.5–3.5 yrs)</option>
                   <option value="jrkg">Jr. KG (3.5–4.5 yrs)</option>
-                  <option value="srkg">Sr. KG (4.5–5.5 yrs)</option>
+                  <option value="srkg" selected>Sr. KG (4.5–5.5 yrs)</option>
                 </select>
                 <span class="err-msg">Please select a program.</span>
               </div>
-              <div class="form-group">
-                <label for="startDate">Preferred Start Date</label>
-                <input type="date" id="startDate" name="startDate" />
+              <div class="form-step-nav">
+                <button type="button" class="btn-prev" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn-next" onclick="nextStep(2)">Continue <i class="fas fa-arrow-right"></i></button>
               </div>
+              <p class="step-hint">Step 2 of 3</p>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="visitDate">Preferred Visit Date</label>
-                <input type="date" id="visitDate" name="visitDate" />
-              </div>
+
+            <!-- STEP 3: Optional Details -->
+            <div class="form-step" id="formStep3">
               <div class="form-group">
                 <label for="source">How did you hear about us?</label>
                 <select id="source" name="source">
                   <option value="">Select source</option>
                   <option value="google">Google Search</option>
-                  <option value="facebook">Facebook</option>
+                  <option value="facebook">Facebook / Instagram</option>
                   <option value="friend">Friend / Family Referral</option>
                   <option value="walkin">Walk-in</option>
                   <option value="other">Other</option>
                 </select>
               </div>
+              <div class="form-group" style="margin-top:14px;">
+                <label for="comments">Any questions or special requirements?</label>
+                <textarea id="comments" name="comments" placeholder="Optional — ask us anything..."></textarea>
+              </div>
+              <div class="form-step-nav">
+                <button type="button" class="btn-prev" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="submit" class="btn-next btn-submit" id="submitBtn">
+                  <span class="btn-label"><i class="fas fa-paper-plane" aria-hidden="true"></i> Submit Enquiry</span>
+                  <span class="spinner" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="step-hint">Step 3 of 3 &nbsp;·&nbsp; All fields on this step are optional</p>
             </div>
-            <div class="form-group">
-              <label for="comments">Additional Questions / Comments</label>
-              <textarea id="comments" name="comments" placeholder="Any specific questions or requirements..."></textarea>
-            </div>
-            <button type="submit" class="btn-submit magnetic" id="submitBtn">
-              <span class="btn-label"><i class="fas fa-paper-plane" aria-hidden="true"></i> Submit Enquiry</span>
-              <span class="spinner" aria-hidden="true"></span>
-            </button>
           </form>
           <div class="form-notice error" id="formNotice" role="alert"></div>
         </div>
@@ -3518,12 +3665,7 @@
     const minDate = new Date(today.getFullYear() - 7, today.getMonth(), today.getDate());
     dobInput.min = minDate.toISOString().split('T')[0];
   }
-  // Restrict start/visit date to future dates only
-  const startDateInput = document.getElementById('startDate');
-  const visitDateInput = document.getElementById('visitDate');
   const todayStr = new Date().toISOString().split('T')[0];
-  if (startDateInput) startDateInput.min = todayStr;
-  if (visitDateInput) visitDateInput.min = todayStr;
 
   // ── Validators ──
   const isPhone  = v => /^[6-9]\d{9}$/.test(v);
@@ -3563,12 +3705,61 @@
     });
   });
 
+  // ── MULTI-STEP FORM NAVIGATION ──
+  let currentStep = 1;
+
+  function goToStep(n) {
+    // hide current, show target
+    document.getElementById('formStep' + currentStep).classList.remove('active');
+    document.getElementById('formStep' + n).classList.add('active');
+
+    // update progress dots
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('sdot' + i);
+      const lbl = document.getElementById('slbl' + i);
+      dot.classList.remove('active', 'done');
+      lbl.classList.remove('active', 'done');
+      if (i < n)       { dot.classList.add('done'); lbl.classList.add('done'); }
+      else if (i === n){ dot.classList.add('active'); lbl.classList.add('active'); }
+    }
+    for (let i = 1; i <= 2; i++) {
+      const con = document.getElementById('scon' + i);
+      if (con) con.classList.toggle('done', i < n);
+    }
+    currentStep = n;
+    // scroll form into view smoothly
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  window.nextStep = function(from) {
+    if (from === 1) {
+      const ok = [
+        validateField('parentName', notEmpty),
+        validateField('phone',      isPhone),
+        validateField('email',      isEmail),
+      ].every(Boolean);
+      if (!ok) return;
+    }
+    if (from === 2) {
+      const ok = [
+        validateField('childName', notEmpty),
+        validateField('dob',       notEmpty),
+        validateField('program',   notEmpty),
+      ].every(Boolean);
+      if (!ok) return;
+    }
+    goToStep(from + 1);
+  };
+
+  window.prevStep = function(from) { goToStep(from - 1); };
+
   // ── Form submit → Web3Forms API ──
   if (form && submitBtn && formSuccess) {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       clearFormNotice();
 
+      // Final validation across all steps
       const valid = [
         validateField('parentName', notEmpty),
         validateField('phone',      isPhone),
@@ -3604,8 +3795,6 @@
           '👶 Child Name'      : raw.childName,
           '🎂 Date of Birth'   : raw.dob        || '—',
           '📚 Program'         : program,
-          '📅 Preferred Start' : raw.startDate  || '—',
-          '🗓 Preferred Visit'  : raw.visitDate  || '—',
           '🔍 Found Us Via'    : source,
           '💬 Comments'        : raw.comments   || '—',
           '⏰ Submitted At'    : submittedAt + ' IST',
@@ -3668,7 +3857,7 @@
       }, stepMs);
       counterObserver.unobserve(el);
     });
-  }, { threshold: 0.45 });
+  }, { threshold: 0.1 });
   counters.forEach((c) => counterObserver.observe(c));
 
   const interactiveCards = document.querySelectorAll('.about-card, .program-card, .feature-card, .activity-card, .gallery-card, .testi-card');
